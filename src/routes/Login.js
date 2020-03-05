@@ -1,67 +1,75 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Form } from 'react-bootstrap'
 import { ReactComponent as Logo } from '../assets/dm-d-logo.svg'
 import styles from './lo.module.css'
-import { SubmitButton } from '../components/common/FormControls'
+import { FieldInput, SubmitButton } from '../components/common/FormControls'
 import { Formik } from 'formik'
+import { login, validateUser } from '../redux/actions/AuthActions'
 
 const Login = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
-  const onAuthenticated = () => {
-    if (isAuthenticated === true) {
-      history.push('/')
-    }
+  
+  if(isAuthenticated === true) {
+    history.push('/console')
   }
-  useEffect(onAuthenticated, [isAuthenticated])
 
   return (
     <div className={styles.wr}>
+      <div style={{ margin: '1rem 0' }}>
+        <pre
+          style={{
+            background: '#f6f8fa',
+            fontSize: '.65rem',
+            padding: '.5rem'
+          }}
+        >
+          <p>
+            <strong>isAuthenticated</strong> = {isAuthenticated.toString()}
+          </p>
+        </pre>
+      </div>
+      
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ username: '', password: '', email: '' }}
         onSubmit={(values, { setSubmitting, setFieldError, setFieldValue }) => {
-          console.log("HI")
+          const { username, password } = values;
+          dispatch(login(username, password)).then(_ => {
+            setSubmitting(false)
+            history.push('/console')
+          })
+          .catch(error => {    
+            setFieldError('username', error)
+            setFieldValue('password', '', false)
+            setSubmitting(false)
+          })
         }}
       >
-        {( {values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
+        {( {handleSubmit,
           isSubmitting }) => (
       <Form className={styles.formsignin}>
-        <Logo className={`${styles.logo} mb-5`}/>
-
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label className="sr-only">Email address</Form.Label>
-          <Form.Control 
-            type="email" 
-            placeholder="Enter email" 
-            size="lg"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
-          />
-          <Form.Text className="text-muted">
-          </Form.Text>
-        </Form.Group>
-
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label className="sr-only">Password</Form.Label>
-          <Form.Control
-            type="password" 
-            placeholder="Password" 
-            size="lg"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
-          />
-        </Form.Group>
-        <SubmitButton type="submit" title="Log In"/>
-        <p className="mt-5 mb-3 text-muted">🏎 © 2020</p>
+        <div className="text-center">
+          <Logo className={`${styles.logo} mb-5`}/>
+        </div>
+        <FieldInput
+          name="username"
+          type="username"
+          placeholder="Email"
+          disabled={isSubmitting}
+        />
+        <FieldInput
+          name="password"
+          type="password"
+          placeholder="Password"
+          disabled={isSubmitting}
+        />
+        <SubmitButton type="submit" onClick={handleSubmit}>
+        Log In
+        </SubmitButton>
+        <p className="mt-5 mb-3 text-muted text-center">🏎 © 2020</p>
       </Form>
       )}
       </Formik>

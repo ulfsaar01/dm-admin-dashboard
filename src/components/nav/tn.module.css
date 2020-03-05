@@ -1,0 +1,64 @@
+.bl {
+  background: transparent;
+  outline: none !important;
+  width: 50px;
+  height: 50px;
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  border-radius: 50%;
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  cursor: pointer;
+}
+
+.bl:hover {
+  outline: none;
+  background-color: #ff5e6d;
+}
+
+.bl:active {
+  outline: none;
+  background-color: #ff5e6d;
+  border: 4px solid #ffbbc1;
+}
+
+.blf {
+  background-color: #eee;
+  border: 4px solid #ffbbc1;
+}
+
+.pfb {
+  background: transparent;
+  outline: none;
+  width: 50px;
+  height: 50px;
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  border-radius: 50%;
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+
+.pfb:hover {
+  background: #eee;
+}
+
+.pfb:active {
+  background: #ffbbc1
+}
+
+.pfbi {
+  width: 42px;
+  height: 42px;
+  background-size: cover;
+}

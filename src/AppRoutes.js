@@ -1,14 +1,14 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Home from './routes/Home'
+import Console from './routes/Console'
 import Login from './routes/Login'
 
 const AppRoutes = () => {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/" component={Login} />
+        <Route path="/console" component={Console} />
       </Switch>
     </div>
   )

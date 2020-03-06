@@ -1,23 +1,36 @@
 .verticalnav {
-  min-width: 12rem;
-  width: 12rem;
+  min-width: 14.5rem;
+  width: 14.5rem;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.05);
-  transition: all 0.4s;
-  background-color: #ff5e6d;
+  /*transition: all 0.4s;*/
+  transition-property: margin-left;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  background-color: white;
   /*background: linear-gradient(-0.3turn, #ff5e6d, #FF8872);*/
   padding-top: 66px;
 }
 
+.animate {
+  transition-property: margin-left;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+
 .sidebar {
+  margin-left: -14.5rem;
+}
+
+.sidebar.active {
   margin-left: 0;
 }
 
 .sidebarActive {
-  margin-left: -12rem;
+  margin-left: 0;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -31,11 +44,13 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  
   .sidebar {
-    margin-left: -12rem;
+    /*margin-left: -14.5rem;*/
+    margin-left: 0;
   }
   .sidebarActive {
-    margin-left: 0;
+    margin-left: -14.5rem;
   }
 }
 
@@ -43,6 +58,6 @@
 @media only screen and (min-width: 992px) {
 }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
+/* Extra large devices (large laptops and desktops, 1600px and up) */
+@media only screen and (min-width: 1600px) {
 }

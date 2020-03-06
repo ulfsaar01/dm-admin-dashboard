@@ -4,10 +4,12 @@ import { BrowserRouter } from 'react-router-dom'
 import AppRoutes from './AppRoutes'
 import Parse from "parse";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faPlus, faList, faThLarge, faHome, faFlagCheckered, faBook, faAward, faCrown, faFighterJet, faRocket, faHippo} from '@fortawesome/free-solid-svg-icons'
+import { faFortAwesome } from '@fortawesome/free-brands-svg-icons'
+
 import { validateUser } from './redux/actions/AuthActions'
 
-library.add(faBars)
+library.add(faBars, faPlus, faList, faThLarge, faHome, faFlagCheckered, faBook, faAward, faCrown, faFighterJet, faRocket, faFortAwesome, faHippo)
 
 const App = _ => {
   const dispatch = useDispatch()

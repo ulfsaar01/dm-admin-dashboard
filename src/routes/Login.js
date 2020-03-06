@@ -18,21 +18,7 @@ const Login = () => {
   }
 
   return (
-    <div className={styles.wr}>
-      <div style={{ margin: '1rem 0' }}>
-        <pre
-          style={{
-            background: '#f6f8fa',
-            fontSize: '.65rem',
-            padding: '.5rem'
-          }}
-        >
-          <p>
-            <strong>isAuthenticated</strong> = {isAuthenticated.toString()}
-          </p>
-        </pre>
-      </div>
-      
+    <div className={`${styles.wr} bg-dark`}>
       <Formik
         initialValues={{ username: '', password: '', email: '' }}
         onSubmit={(values, { setSubmitting, setFieldError, setFieldValue }) => {

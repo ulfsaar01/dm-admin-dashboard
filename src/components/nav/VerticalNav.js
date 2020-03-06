@@ -1,48 +1,50 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import styles from './vn.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const VerticalNav = props => {
-  const { isActive } = props
+const VerticalNav = () => {
+//library.add(faBars, faPlus, faList, faThLarge, faHome, faFlagCheckered, faBook, faAward, faCrown, faFighterJet, faRocket, faFortAwesome)
 
   return (
-    <div className={`${isActive ? styles.sidebarActive : styles.sidebar} ${styles.verticalnav}`} id="sidebar">
+    <div activeClassName={styles.active} className={`${styles.sidebar} ${styles.verticalnav}`} id="sidebar">
       <ul className="nav flex-column mb-0">
       <li className="nav-item">
-        <a href="#" className="nav-link text-light">
-                  <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                  Home
-              </a>
+        <NavLink exact to="/console">
+          <FontAwesomeIcon icon="home" size="1x"/>
+          Dashboard
+        </NavLink>
       </li>
       <li className="nav-item">
-        <a href="#" className="nav-link text-light">
-                  <i className="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-                  Marketing Products
-              </a>
+        <NavLink exact to="/challenges">
+          <FontAwesomeIcon icon="rocket" size="1x"/>
+          Marketing Products
+        </NavLink>
       </li>
       <li className="nav-item">
-        <a href="#" className="nav-link text-light">
-                  <i className="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                  Challenges
-              </a>
+        <NavLink exact to="/challenges">
+          <FontAwesomeIcon icon="crown" size="1x"/>
+          Challenges
+        </NavLink>
       </li>
       <li className="nav-item">
-        <a href="#" className="nav-link text-light">
-                  <i className="fa fa-cubes mr-3 text-primary fa-fw"></i>
-                  Badges
-              </a>
+       <NavLink exact to="/challenges">
+          <FontAwesomeIcon icon="award" size="1x"/>
+          Badges
+        </NavLink>
       </li>
       <li className="nav-item">
-        <a href="#" className="nav-link text-light">
-                  <i className="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-                  Magazines
-              </a>
+        <NavLink exact to="/challenges">
+          <FontAwesomeIcon icon="hippo" size="1x"/>
+          Magazine
+        </NavLink>
       </li>
       
       <li className="nav-item">
-        <a href="#" className="nav-link text-light">
-                  <i className="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-                  Blog
-              </a>
+        <NavLink exact to="/challenges">
+          <FontAwesomeIcon icon="book" size="1x"/>
+          Book
+        </NavLink>
       </li>
       </ul>
       </div>

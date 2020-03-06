@@ -1,8 +1,10 @@
 .pagecontent {
-  width: calc(100% - 12rem);
-  margin-left: 12rem;
-  transition: all 0.4s;
-  padding: 86px 20px 0 20px;
+  width: calc(100% - 14.5rem);
+  margin-left: 14.5rem;
+  transition-property: margin-left;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  padding: 44px 0 0 0;
 }
 
 .contentActive {
@@ -26,8 +28,8 @@
     margin: 0;
   }
   .contentActive {
-    margin-left: 12rem;
-    width: calc(100% - 12rem);
+    margin-left: 14.5rem;
+    width: calc(100% - 14.5rem);
   }
 }
 
@@ -35,6 +37,6 @@
 @media only screen and (min-width: 992px) {
 }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
+/* Extra large devices (large laptops and desktops, 1600px and up) */
+@media only screen and (min-width: 1600px) {
 }

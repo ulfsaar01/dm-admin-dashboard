@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './fc.module.css'
 import { useField } from 'formik'
 import { Form } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 /*
 export const FieldInputGroup = ({ ...props }) => {
   const [field, meta] = useField(props)
@@ -44,6 +45,13 @@ export const FieldInput = ({ ...props }) => {
 
 export const SubmitButton = props => (
   <button type="submit" className={styles.pr} onClick={props.onClick}>
+    {props.children}
+  </button>
+)
+
+export const CreateButton = props => (
+  <button type="submit" className={styles.cr} onClick={props.onClick}>
+    <FontAwesomeIcon icon="plus" size="1x" className={styles.cri}/>
     {props.children}
   </button>
 )

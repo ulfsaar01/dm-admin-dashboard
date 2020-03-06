@@ -87,12 +87,13 @@ export const login = (username, password) => async dispatch => {
   }
 }
 
-export const logout = history => {
-  return dispatch => {
-    console.log('[Parse][AuthActions] Logging Out')
+export const logout = history => async dispatch => {
+  console.log('[Parse][AuthActions] Logging Out')
 
-    localStorage.removeItem("userParseSessionToken");
-    localStorage.removeItem("user")
-    //Auth.signOut()
-  }
+  await api("logOut")
+
+  localStorage.removeItem("userParseSessionToken");
+  localStorage.removeItem("user")
+  dispatch({ type: USER_INVALID })
+  history.push("/")
 }

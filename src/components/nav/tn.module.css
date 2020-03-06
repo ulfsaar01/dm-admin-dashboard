@@ -1,8 +1,16 @@
+.nav {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-wrap: nowrap;
+}
+
+
 .bl {
   background: transparent;
   outline: none !important;
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   border: none;
   padding: 0;
   display: flex;
@@ -24,19 +32,19 @@
 .bl:active {
   outline: none;
   background-color: #ff5e6d;
-  border: 4px solid #ffbbc1;
+  border: 2px solid #ffbbc1;
 }
 
 .blf {
   background-color: #eee;
-  border: 4px solid #ffbbc1;
+  border: 2px solid #ffbbc1;
 }
 
 .pfb {
   background: transparent;
   outline: none;
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   border: none;
   padding: 0;
   display: flex;
@@ -58,7 +66,35 @@
 }
 
 .pfbi {
-  width: 42px;
-  height: 42px;
+  width: 31px;
+  height: 31px;
   background-size: cover;
+}
+
+.mn {
+  display: inline;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .mn {
+    display: none;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1600px and up) */
+@media only screen and (min-width: 1600px) {
 }

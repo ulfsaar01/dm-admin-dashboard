@@ -1,4 +1,3 @@
-import { Auth } from 'aws-amplify'
 import axios from "axios";
 import {
   USER_VALID,

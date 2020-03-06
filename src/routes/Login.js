@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form } from 'react-bootstrap'
@@ -6,7 +6,7 @@ import { ReactComponent as Logo } from '../assets/dm-d-logo.svg'
 import styles from './lo.module.css'
 import { FieldInput, SubmitButton } from '../components/common/FormControls'
 import { Formik } from 'formik'
-import { login, validateUser } from '../redux/actions/AuthActions'
+import { login } from '../redux/actions/AuthActions'
 
 const Login = () => {
   const history = useHistory()

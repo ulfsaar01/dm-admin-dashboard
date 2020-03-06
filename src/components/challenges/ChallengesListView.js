@@ -1,72 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Alert, Table } from 'react-bootstrap'
-import { useFetch } from "../../useFetch";
-import moment from "moment";
 import styles from './clv.module.css'
+import { formatDate } from '../../Utils'
 
-const ListView = designContests => {
-  return designContests.map((contest, index) => (
-    <div key={contest._id}>
-      <p>{contest.url}</p>
-    </div>
-  ))
-}
+const ChallengesListView = props => {
+  const { loading, data } = props
 
-const formatDate = (date) => {
-  const d = moment(date.iso);
-  return d.toLocaleString();
-}
-
-const ChallengesListView = () => {
-  const designContestResults = useFetch("getDesignContests3");
-  const designContestData = designContestResults.data;
-  const designContestLoading = designContestResults.loading;
-
-  const badgeResults = useFetch("getBadges1");
-  const badgeData = badgeResults.data;
-  const badgeLoading = badgeResults.loading;
-
-  const [state, setState] = useState({
-    clickedNew: false,
-    clickedDesignContest: null,
-    gotoLogin: false
-  });
-
-  if (designContestLoading || badgeLoading) {
+  if (loading) {
     return <Alert variant="primary">Loading</Alert>
   }
 
-  if ((designContestData || {}).error || (badgeData || {}).error) {
-    const { error } = (designContestData || {}).error || badgeData || {};
-    return (
-      <Alert
-        message="Error"
-        description={error}
-        type="error"
-        showIcon
-        closable
-        onClose={() => {
-          setState({ gotoLogin: true });
-        }}
-      />
-    );
+  if ((data || {}).error) {
+    const { error } = (data || {}).error
+    return <Alert variant="danger">{error}</Alert>
   }
-  const { clickedNew, clickedDesignContest, gotoLogin } = state;
-  const { designContests } = designContestData.result;
-  const { badges } = badgeData.result;
 
-  if (clickedNew || clickedDesignContest) {
-    const pathname = `/admin/challenges/${
-      (clickedDesignContest || {}).objectId
-    }`;
-    return (
-      <>
-      </>
-    );
-  }
-  if (gotoLogin) {
-    return 
-  }
+  const { designContests } = data.result;
 
   return (
     <Table hover bordered variant="light" className={styles.ts}>
@@ -80,9 +29,9 @@ const ChallengesListView = () => {
         </tr>
       </thead>
       <tbody>
-        {designContests.map((contest, index) => (
+        {designContests.map(contest => (
           <tr key={contest.objectId}>
-            <td><img src={contest.thumbImageFile.url} className={styles.tmg}/></td>
+            <td><img src={contest.thumbImageFile.url} className={styles.tmg} alt={contest.title}/></td>
             <td>{contest.title}</td>
             <td>{formatDate(contest.featuredAt)}</td>
             <td>{formatDate(contest.expiresAt)}</td>

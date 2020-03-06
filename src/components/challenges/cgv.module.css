@@ -1,15 +1,5 @@
-.pagecontent {
-  width: calc(100% - 14.5rem);
-  margin-left: 14.5rem;
-  transition-property: margin-left;
-  transition-duration: 0.2s;
-  transition-timing-function: linear;
-  padding: 102px 0 0 0;
-}
-
-.contentActive {
-  width: 100%;
-  margin: 0;
+.card {
+  width: auto;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -23,13 +13,8 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .content {
-    width: 100%;
-    margin: 0;
-  }
-  .contentActive {
-    margin-left: 14.5rem;
-    width: calc(100% - 14.5rem);
+  .card {
+    width: 18rem;
   }
 }
 

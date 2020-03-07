@@ -39,9 +39,9 @@ const VerticalNav = () => {
         </li>
         
         <li className="nav-item">
-          <NavLink to="/blog" className="nav-link text-muted" activeClassName="text-dark">
+          <NavLink to="/blogs" className="nav-link text-muted" activeClassName="text-dark">
             <FontAwesomeIcon icon="book" size="1x" className="mr-2"/>
-            Book
+            Blogs
           </NavLink>
         </li>
       </ul>

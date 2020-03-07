@@ -13,6 +13,17 @@ import rootReducer from './redux/reducers'
 
 import * as serviceWorker from './serviceWorker'
 
+import 'react-widgets/dist/css/react-widgets.css';
+
+import Moment from 'moment'
+import momentLocalizer from 'react-widgets-moment';
+
+import simpleNumberLocalizer from 'react-widgets-simple-number';
+
+Moment.locale('en')
+momentLocalizer()
+simpleNumberLocalizer()
+
 export const store = createStore(rootReducer, applyMiddleware(thunk))
 
 Amplify.configure(awsconfig)

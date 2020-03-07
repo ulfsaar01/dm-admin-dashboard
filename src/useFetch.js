@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
-const getHeaders = () => {
+export const getHeaders = () => {
   const token = localStorage.getItem("userParseSessionToken")
     ? localStorage.getItem("userParseSessionToken")
     : undefined;

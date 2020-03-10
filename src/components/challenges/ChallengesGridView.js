@@ -9,7 +9,7 @@ const ChallengeCard = ({ contest, handleChallengeClick }) => {
       className={`${styles.card} m-2`}
       onClick={() => handleChallengeClick(contest)}
     >
-      <Card.Img variant="top" src={contest.thumbImageFile.url} />
+      <Card.Img variant="top" src={(contest.thumbImageFile && contest.thumbImageFile.url) ? contest.thumbImageFile.url : ''} />
       <Card.Body>
         <Card.Title>{contest.title}</Card.Title>
         <Card.Subtitle

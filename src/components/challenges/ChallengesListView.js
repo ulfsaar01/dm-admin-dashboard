@@ -31,7 +31,7 @@ const ChallengesListView = props => {
       <tbody>
         {designContests.map(contest => (
           <tr key={contest.objectId}>
-            <td><img src={contest.thumbImageFile.url} className={styles.tmg} alt={contest.title}/></td>
+            <td><img src={(contest.thumbImageFile && contest.thumbImageFile.url) ? contest.thumbImageFile.url : ''} className={styles.tmg} alt={contest.title}/></td>
             <td>{contest.title}</td>
             <td>{formatDate(contest.featuredAt)}</td>
             <td>{formatDate(contest.expiresAt)}</td>

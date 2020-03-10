@@ -1,8 +1,8 @@
 import {
-  CHALLENGES,
-  CHALLENGES_LOADING,
-  CHALLENGES_ERROR
-} from '../../constants/ChallengeActionConstants'
+  BADGES,
+  BADGES_LOADING,
+  BADGES_ERROR
+} from '../../constants/BadgeActionConstants'
 
 const initialState = {
   data: null,
@@ -12,7 +12,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case CHALLENGES: {
+    case BADGES: {
       return {
         ...state,
         data: action.data,
@@ -20,7 +20,7 @@ export default function(state = initialState, action) {
         error: null
       }
     }
-    case CHALLENGES_LOADING: {
+    case BADGES_LOADING: {
       return {
         ...state,
         data: null,
@@ -28,7 +28,7 @@ export default function(state = initialState, action) {
         error: null
       }
     }
-    case CHALLENGES_ERROR: {
+    case BADGES_ERROR: {
       return {
         ...state,
         data: null,

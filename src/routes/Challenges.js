@@ -6,18 +6,24 @@ import { Button, ButtonGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { challenges as challengesAction } from '../redux/actions/ChallengeActions'
+import { challenges as challengesAction} from '../redux/actions/ChallengeActions'
+import { badges as badgesAction} from '../redux/actions/BadgeActions'
+import { useLocation } from "react-router-dom";
 
 const Challenges = props => {
+  const { pathname } = useLocation();
   const history = useHistory()
   const [isGridView, setGridView] = useState(true)
 
   const dispatch = useDispatch()
+  const { data:badges} = useSelector(state => state.badges)
   const { data, error, loading } = useSelector(state => state.challenges)
-  
+
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(challengesAction())
-  }, [dispatch])
+    dispatch(badgesAction())
+  }, [dispatch, pathname])
 
   const toggleListView = () => {
     setGridView(false)
@@ -31,8 +37,10 @@ const Challenges = props => {
     const pathname = `/challenges/${
       (contest || {}).objectId
     }`;
-    history.push(pathname, { contest: contest })
+    history.push(pathname, { contest: contest, badges:badges })
   }
+
+  //console.log(badges)
 /*
   const result = useFetch("getDesignContests3");
   const data = result.data;

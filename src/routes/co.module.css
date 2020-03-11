@@ -1,3 +1,47 @@
 .wrap {
   padding: 20px;
 }
+
+.splash {
+  height: 300px;
+  background: linear-gradient(-0.3turn, #ff5e6d, #ff8872);
+}
+
+.copy {
+  cursor: pointer;
+}
+
+.options {
+  position: absolute;
+  top: 280px;
+}
+
+.optionBtn {
+  outline: none !important;
+  background-color: transparent;
+  border: none;
+  padding: 0.7rem;
+}
+
+.optionBtn:focus {
+  outline: none;
+  background-color: transparent;
+}
+
+.optionBtn:hover {
+  outline: none !important;
+  background-color: #f8f8f8;
+}
+
+.optionBtn:active {
+  outline: none !important;
+  background-color: white;
+}
+
+.optionBtnIcon {
+  color: #6c757d;
+}
+
+.optionSelected {
+  color: #ff5e6d;
+}

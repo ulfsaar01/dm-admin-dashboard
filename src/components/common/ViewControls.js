@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './vc.module.css'
 import { CreateButton } from './FormControls'
-import Switch from "react-switch";
+import Switch from 'react-switch'
 
 const ViewControls = props => {
   const [isDev, setDev] = useState(false)
@@ -12,10 +12,16 @@ const ViewControls = props => {
   }
 
   return (
-    <div className={`${isDev ? styles.barActive : ''} ${styles.bar}` }>
+    <div className={`${isDev ? styles.barActive : ''} ${styles.bar}`}>
       <div className="d-flex align-items-center">
         Dev&nbsp;
-        <Switch onChange={toggleEnv} checked={isDev} uncheckedIcon={false} checkedIcon={false} onColor={'#ff5e6d'}/>
+        <Switch
+          onChange={toggleEnv}
+          checked={isDev}
+          uncheckedIcon={false}
+          checkedIcon={false}
+          onColor={'#ff5e6d'}
+        />
         &nbsp;Prod
       </div>
       <CreateButton>Create Challenge</CreateButton>

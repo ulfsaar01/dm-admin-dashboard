@@ -21,7 +21,11 @@ import {
   faTimes,
   faSkull,
   faCloudUploadAlt,
-  faImage
+  faImage,
+  faSignOutAlt,
+  faBrush,
+  faChevronLeft,
+  faCopy
 } from '@fortawesome/free-solid-svg-icons'
 import { faFortAwesome } from '@fortawesome/free-brands-svg-icons'
 
@@ -45,7 +49,11 @@ library.add(
   faTimes,
   faSkull,
   faCloudUploadAlt,
-  faImage
+  faImage,
+  faSignOutAlt,
+  faBrush,
+  faChevronLeft,
+  faCopy
 )
 
 const App = _ => {

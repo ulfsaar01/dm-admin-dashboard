@@ -5,12 +5,11 @@
   flex-wrap: nowrap;
 }
 
-
 .bl {
   background: transparent;
   outline: none !important;
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   border: none;
   padding: 0;
   display: flex;
@@ -18,7 +17,7 @@
   align-items: center;
   flex-wrap: nowrap;
   border-radius: 50%;
-  transition-property: background-color;
+  transition-property: background-color, border-color;
   transition-duration: 0.2s;
   transition-timing-function: linear;
   cursor: pointer;
@@ -26,18 +25,16 @@
 
 .bl:hover {
   outline: none;
-  background-color: #ff5e6d;
+  background-color: #ffbbc1;
 }
 
 .bl:active {
   outline: none;
   background-color: #ff5e6d;
-  border: 2px solid #ffbbc1;
 }
 
 .blf {
   background-color: #eee;
-  border: 2px solid #ffbbc1;
 }
 
 .pfb {
@@ -62,7 +59,7 @@
 }
 
 .pfb:active {
-  background: #ffbbc1
+  background: #ffbbc1;
 }
 
 .pfbi {
@@ -81,7 +78,6 @@
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

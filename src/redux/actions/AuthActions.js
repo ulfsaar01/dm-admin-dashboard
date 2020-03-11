@@ -1,63 +1,60 @@
-import axios from "axios";
-import {
-  USER_VALID,
-  USER_INVALID
-} from '../../constants/AuthActionsConstants'
+import axios from 'axios'
+import { USER_VALID, USER_INVALID } from '../../constants/AuthActionsConstants'
 
 const getHeaders = () => {
-  const token = localStorage.getItem("userParseSessionToken")
-    ? localStorage.getItem("userParseSessionToken")
-    : undefined;
+  const token = localStorage.getItem('userParseSessionToken')
+    ? localStorage.getItem('userParseSessionToken')
+    : undefined
   const headers = {
-    "Content-Type": "application/json",
-    "X-Parse-Application-Id": process.env.REACT_APP_APPID
-  };
+    'Content-Type': 'application/json',
+    'X-Parse-Application-Id': process.env.REACT_APP_APPID
+  }
 
   if (token) {
-    headers["X-Parse-Session-Token"] = token;
+    headers['X-Parse-Session-Token'] = token
   }
-  return headers;
-};
+  return headers
+}
 
-export const api = async (functionName, body, method = "POST") => {
-  const url = `${process.env.REACT_APP_SERVER_URL}${functionName}`;
+export const api = async (functionName, body, method = 'POST') => {
+  const url = `${process.env.REACT_APP_SERVER_URL}${functionName}`
   const appendant = {
     method,
     headers: getHeaders(),
     body
-  };
-  let response = await fetch(url, appendant);
-  return response.json();
-};
+  }
+  let response = await fetch(url, appendant)
+  return response.json()
+}
 
 export const sendBase64File = async (signedUrl, base64, file) => {
-  debugger;
+  debugger
   try {
     const result = await axios.put(signedUrl, base64, {
       headers: {
-        "Content-Type": file.type,
-        "Content-Encoding": "base64"
+        'Content-Type': file.type,
+        'Content-Encoding': 'base64'
       }
-    });
+    })
     debugger
-    return result;
+    return result
   } catch (e) {
     debugger
-    console.log(e);
+    console.log(e)
   }
-};
+}
 
 export const validateUser = () => dispatch => {
-  const token = localStorage.getItem("userParseSessionToken")
-    ? localStorage.getItem("userParseSessionToken")
-    : undefined;
-  
-  const user = localStorage.getItem("user")
-    ? localStorage.getItem("user")
-    : undefined;
+  const token = localStorage.getItem('userParseSessionToken')
+    ? localStorage.getItem('userParseSessionToken')
+    : undefined
+
+  const user = localStorage.getItem('user')
+    ? localStorage.getItem('user')
+    : undefined
 
   if (token && user) {
-    dispatch({ type: USER_VALID, user:JSON.parse(user) })
+    dispatch({ type: USER_VALID, user: JSON.parse(user) })
   } else {
     dispatch({ type: USER_INVALID })
   }
@@ -68,31 +65,31 @@ export const login = (username, password) => async dispatch => {
   const body = JSON.stringify({
     username,
     password
-  });
+  })
 
-  localStorage.removeItem("userParseSessionToken");
-  localStorage.removeItem("user")
+  localStorage.removeItem('userParseSessionToken')
+  localStorage.removeItem('user')
 
-  let data = await api("logInWithEmail1", body);
-  
-  if(data.error) {
+  let data = await api('logInWithEmail1', body)
+
+  if (data.error) {
     throw data.error
   } else {
-    const user = data.result;
+    const user = data.result
     console.log(user)
-    localStorage.setItem("userParseSessionToken", user.sessionToken);
-    localStorage.setItem("user", JSON.stringify(user))
-    dispatch({ type: USER_VALID, user:user })
+    localStorage.setItem('userParseSessionToken', user.sessionToken)
+    localStorage.setItem('user', JSON.stringify(user))
+    dispatch({ type: USER_VALID, user: user })
   }
 }
 
 export const logout = history => async dispatch => {
   console.log('[Parse][AuthActions] Logging Out')
 
-  await api("logOut")
+  await api('logOut')
 
-  localStorage.removeItem("userParseSessionToken");
-  localStorage.removeItem("user")
+  localStorage.removeItem('userParseSessionToken')
+  localStorage.removeItem('user')
   dispatch({ type: USER_INVALID })
-  history.push("/")
+  history.push('/')
 }

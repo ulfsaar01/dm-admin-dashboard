@@ -1,7 +1,4 @@
-import {
-  USER_VALID,
-  USER_INVALID
-} from '../../constants/AuthActionsConstants'
+import { USER_VALID, USER_INVALID } from '../../constants/AuthActionsConstants'
 
 const initialState = {
   isAuthenticated: false,
@@ -17,7 +14,7 @@ export default function(state = initialState, action) {
       }
     }
     case USER_INVALID: {
-      console.log("*&*&*&*&*&*&*&")
+      console.log('*&*&*&*&*&*&*&')
       return {
         user: null,
         isAuthenticated: false

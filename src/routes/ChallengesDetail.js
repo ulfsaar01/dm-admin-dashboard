@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Card,
-} from 'react-bootstrap'
+import { Container, Row, Col, Form, Card } from 'react-bootstrap'
 import { useHistory, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DateTimePicker, NumberPicker } from 'react-widgets'
+import { DateTimePicker } from 'react-widgets'
 import {
   DMInputGroup,
   DMSelectGroup,
   DMTextAreaGroup,
   DMNumberGroup,
   DMImageUploadGroup,
-  EditButton,
-  CancelButton,
-  DeleteButton,
+  BackLongButton,
   SubmitButton
 } from '../components/common/FormControls'
 import * as Yup from 'yup'
@@ -25,31 +17,26 @@ import moment from 'moment'
 import { Formik } from 'formik'
 import styles from './co.module.css'
 import ERROR from '../constants/ValidationConstants'
-import { badges } from '../redux/actions/BadgeActions'
-import { challenges } from '../redux/actions/ChallengeActions'
 import { api } from '../useFetch'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const categories = require('../data/category.json')
 
 const categoriesOptions = categories.map(category => {
-  return <option key={category.Id} value={category.Id}>{category.shortName}</option>
+  return (
+    <option key={category.Id} value={category.Id}>
+      {category.shortName}
+    </option>
+  )
 })
-
-const getBase64 = file => {
-  return new Promise((resolve, reject) => {
-    let reader = new FileReader();
-
-    reader.onload = () => {
-      resolve(reader.result);
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-};
 
 const challengeSchema = Yup.object().shape({
   title: Yup.string().required(ERROR.REQUIRE),
-  status: Yup.string().required(ERROR.REQUIRE)
+  requirement: Yup.string().required(ERROR.REQUIRE),
+  guidelines: Yup.string().required(ERROR.REQUIRE),
+  guidelinesShort: Yup.string().required(ERROR.REQUIRE),
+  reward: Yup.string().required(ERROR.REQUIRE),
+  buttons: Yup.string().required(ERROR.REQUIRE)
 })
 
 const ChallengesDetail = props => {
@@ -74,55 +61,46 @@ const ChallengesDetail = props => {
     }
   })
   */
- 
-  const { pathname } = useLocation();
+
+  const { pathname } = useLocation()
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
   }, [pathname])
   const history = useHistory()
   const { contest, badges } = (props.location || {}).state || {}
-  //const contest = state.contest || {}
-  /*
-  const [thumbUrl, setThumbUrl] = useState()
-  const [backdropUrl, setBackdropUrl] = useState()
-  const [contestUrl, setContestUrl] = useState()
-  var prevThumbUrl = ''
-  var prevBackdropUrl = ''
-  var prevContestUrl = ''
-*/
-console.log(contest)
-  const [thumbUrl, setThumbUrl] = useState((contest.thumbImageFile || {}).url)
-  const [backdropUrl, setBackdropUrl] = useState((contest.backdropImageFile || {}).url)
-  const [contestUrl, setContestUrl] = useState((contest.contestImageFile || {}).url)
 
-  const [featuredAt, setFeaturedAt] = useState(new Date(moment((contest.featuredAt || {}).iso)))
-  const [expiresAt, setExpiresAt] = useState(new Date(moment((contest.expiresAt || {}).iso)))
+  console.log(contest)
+  const [thumbUrl, setThumbUrl] = useState((contest.thumbImageFile || {}).url)
+  const [backdropUrl, setBackdropUrl] = useState(
+    (contest.backdropImageFile || {}).url
+  )
+  const [contestUrl, setContestUrl] = useState(
+    (contest.contestImageFile || {}).url
+  )
+
+  const [featuredAt, setFeaturedAt] = useState(
+    new Date(moment((contest.featuredAt || {}).iso))
+  )
+  const [expiresAt, setExpiresAt] = useState(
+    new Date(moment((contest.expiresAt || {}).iso))
+  )
 
   var prevThumbUrl = contest.thumbImageFile
   var prevBackdropUrl = contest.backdropImageFile
   var prevContestUrl = contest.contestImageFile
 
-  
-
   const badgeOptions = badges.badges.map(badge => {
-    return <option key={badge.objectId} value={badge.objectId}>{badge.title}</option>;
+    return (
+      <option key={badge.objectId} value={badge.objectId}>
+        {badge.title}
+      </option>
+    )
   })
-/*
-  useEffect(() => {
-    const { contest } = (props.location || {}).state || {}
-    if (typeof contest === 'undefined') {
-      history.push('/challenges')
-    } else {
-      setState({ ...state, ...{ contest } })
-      setThumbUrl((contest.thumbImageFile || {}).url)
-      setBackdropUrl((contest.backdropImageFile || {}).url)
-      setContestUrl((contest.contestImageFile || {}).url)
-      prevThumbUrl = contest.thumbImageFile
-      prevBackdropUrl = contest.backdropImageFile
-      prevContestUrl = contest.contestImageFile
-    }
-  }, [])
-*/
+
+  const goBack = () => {
+    history.goBack()
+  }
+
   const onUploadImage = (event, id) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0]
@@ -152,16 +130,6 @@ console.log(contest)
     setContestUrl((prevContestUrl || {}).url)
   }
 
-  const prepartImagesForSubmission = async () => {
-    if(thumbUrl.includes("http"))
-    {
-      const thumb64 = await getBase64(thumbUrl)
-      setThumbUrl(thumb64)
-      console.log(thumb64)
-    }
-    //
-  }
-  
   const prepareSubmission = values => {
     let {
       title,
@@ -177,9 +145,9 @@ console.log(contest)
       numChallenges,
       seriesTitle,
       buttons
-    } = values;
+    } = values
 
-    const designContestId = (contest || {}).objectId;
+    const designContestId = (contest || {}).objectId
     /*
     console.log(contestId)
     console.log(title)
@@ -201,27 +169,30 @@ console.log(contest)
     console.log(thumbUrl)
     console.log(backdropUrl)
     */
-    const thumbImageData = (thumbUrl && !thumbUrl.includes("http"))
-      ? {
-          __type: "Bytes",
-          base64: thumbUrl
-        }
-      : undefined;
+    const thumbImageData =
+      thumbUrl && !thumbUrl.includes('http')
+        ? {
+            __type: 'Bytes',
+            base64: thumbUrl
+          }
+        : undefined
 
-    const backdropImageData = (backdropUrl && !backdropUrl.includes("http"))
-      ? {
-          __type: "Bytes",
-          base64: backdropUrl
-        }
-      : undefined;
+    const backdropImageData =
+      backdropUrl && !backdropUrl.includes('http')
+        ? {
+            __type: 'Bytes',
+            base64: backdropUrl
+          }
+        : undefined
 
-    const contestImageData = (contestUrl && !contestUrl.includes("http"))
-      ? {
-          __type: "Bytes",
-          base64: contestUrl
-        }
-      : undefined;
-    
+    const contestImageData =
+      contestUrl && !contestUrl.includes('http')
+        ? {
+            __type: 'Bytes',
+            base64: contestUrl
+          }
+        : undefined
+
     const body = JSON.stringify({
       title,
       designContestId,
@@ -242,65 +213,67 @@ console.log(contest)
       numChallenges,
       seriesTitle,
       buttons
-    });
-    
+    })
+
     return body
   }
 
-  const submitChallenge = (body, { setSubmitting } ) => {
-    const designContestId = (contest || {}).objectId;
+  const submitChallenge = (body, { setSubmitting }) => {
+    const designContestId = (contest || {}).objectId
     //console.log(body.contestId)
     try {
-      const apiName = `${
-        designContestId ? "update" : "create"
-      }DesignContest1`;
-      
+      const apiName = `${designContestId ? 'update' : 'create'}DesignContest1`
+
       api(apiName, body)
         .then(result => {
-          console.log("SAVE COMPLETE!!")
+          console.log('SAVE COMPLETE!!')
           setSubmitting(false)
 
           if (result.error) {
-            console.log("ERROR IN SAVING!!!!")
+            console.log('ERROR IN SAVING!!!!')
           } else {
-            console.log("SAVE COMPLETE!!")
-            history.push("/challenges");
+            console.log('SAVE COMPLETE!!')
+            history.push('/challenges')
           }
         })
         .catch(error => {
           setSubmitting(false)
-          console.log("SYSTEM ERROR IN SAVING!!!!  " + error)
+          console.log('SYSTEM ERROR IN SAVING!!!!  ' + error)
         })
     } catch (e) {
       setSubmitting(false)
-      console.log("SYSTEM ERROR IN SAVING!!!!  " + e)
+      console.log('SYSTEM ERROR IN SAVING!!!!  ' + e)
     }
   }
 
   const initialValues = {
+    objectId: (contest || {}).objectId,
     title: contest.title,
     status: contest.status,
-    categoryId: (contest.categoryId || ''),
-    badgeId: ((contest.badge && contest.badge.objectId) ? contest.badge.objectId : ''),
+    categoryId: contest.categoryId || '',
+    badgeId:
+      contest.badge && contest.badge.objectId ? contest.badge.objectId : '',
     type: contest.type,
     requirement: contest.requirement,
     guidelines: contest.guidelines,
     guidelinesShort: contest.guidelinesShort,
-    likesRequired: (contest.likesRequired || 0),
-    coinReward: (contest.coinReward || 0),
+    likesRequired: contest.likesRequired || 0,
+    coinReward: contest.coinReward || 0,
     featuredAt: contest.featuredAt,
     reward: contest.reward,
-    seriesTitle: (contest.seriesTitle || ''),
+    seriesTitle: contest.seriesTitle || '',
     numChallenges: contest.numChallenges,
     buttons: JSON.stringify(contest.buttons)
   }
 
   return (
     <div className={styles.wrap}>
+      <BackLongButton onClick={goBack}>Return to Challenge</BackLongButton>
+      <h2 className="py-3">Challenge</h2>
       <Formik
         initialValues={initialValues}
-        onSubmit={ (values, { setSubmitting, setFieldError, setFieldValue }) => {
-          console.log("SUBMITTING")
+        onSubmit={(values, { setSubmitting, setFieldError, setFieldValue }) => {
+          console.log('SUBMITTING')
           const body = prepareSubmission(values)
           submitChallenge(body, { setSubmitting })
         }}
@@ -310,45 +283,60 @@ console.log(contest)
         validationSchema={challengeSchema}
       >
         {props => {
-          const {
-            values,
-            touched,
-            errors,
-            dirty,
-            isSubmitting,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            handleReset
-          } = props
+          const { values, isSubmitting, handleSubmit } = props
           return (
             <Form onSubmit={handleSubmit}>
-              <Card className="rounded-0 mb-3">
+              {typeof values.objectId === 'undefined' ? null : (
+                <Card className="rounded mb-3">
+                  <Card.Body>
+                    <Container fluid="true">
+                      <Row>
+                        <Col>
+                          <h4 className="m-0 p-0">
+                            {(contest || {}).objectId}
+                            <CopyToClipboard text={(contest || {}).objectId}>
+                              <FontAwesomeIcon
+                                icon="copy"
+                                size="1x"
+                                className={`${styles.copy} ml-2`}
+                              />
+                            </CopyToClipboard>
+                          </h4>
+                        </Col>
+                        <Col
+                          className={`align-items-center align-self-center 
+                            justify-content-center text-right text-uppercase
+                            font-weight-bold ${
+                              contest.status === 'active'
+                                ? 'text-success'
+                                : 'text-danger'
+                            }`}
+                        >
+                          {contest.status === 'active' ? 'active' : 'ended'}
+                        </Col>
+                      </Row>
+                    </Container>
+                  </Card.Body>
+                </Card>
+              )}
+
+              <Card className="rounded">
+                <Card.Header>
+                  <h3 className="m-0">Information</h3>
+                </Card.Header>
                 <Card.Body>
-                  <Container fluid="true">
-                    <Row>
-                      <Col
-                        className={`align-items-center align-self-center justify-content-center ${
-                          contest.status === 'closed'
-                            ? 'text-danger'
-                            : 'text-success'
-                        }`}
-                      >
-                        {contest.status}
-                        {isSubmitting.toString()}
-                      </Col>
-                      <Col className="text-right">
-                        <CancelButton onClick={handleReset} />
-                      </Col>
-                    </Row>
-                  </Container>
-                </Card.Body>
-              </Card>
-              <Card className="rounded-0">
-                <Card.Header>Challenge</Card.Header>
-                <Card.Body>
-                  <DMInputGroup title="Title" id="title" disabled={isSubmitting} {...props} />
-                  <DMSelectGroup title="Category" id="categoryId" disabled={isSubmitting} {...props}>
+                  <DMInputGroup
+                    title="Title"
+                    id="title"
+                    disabled={isSubmitting}
+                    {...props}
+                  />
+                  <DMSelectGroup
+                    title="Category"
+                    id="categoryId"
+                    disabled={isSubmitting}
+                    {...props}
+                  >
                     {categoriesOptions}
                   </DMSelectGroup>
                   <DMTextAreaGroup
@@ -381,14 +369,21 @@ console.log(contest)
                   />
                 </Card.Body>
               </Card>
-              <Card className="rounded-0 mt-3">
-                <Card.Header>Challenge Type</Card.Header>
+              <Card className="rounded mt-3">
+                <Card.Header>
+                  <h3 className="m-0">Challenge Type</h3>
+                </Card.Header>
                 <Card.Body>
-                  <DMSelectGroup title="Type" id="type" disabled={isSubmitting} {...props}>
+                  <DMSelectGroup
+                    title="Type"
+                    id="type"
+                    disabled={isSubmitting}
+                    {...props}
+                  >
                     <option value="design">Design</option>
                     <option value="series">Series</option>
                   </DMSelectGroup>
-                  {values.type === "series" && (
+                  {values.type === 'series' && (
                     <DMNumberGroup
                       title="Num Series Challenges"
                       id="numChallenges"
@@ -398,13 +393,20 @@ console.log(contest)
                       {...props}
                     />
                   )}
-                  {values.type === "series" && (
-                    <DMInputGroup title="Series Title" id="seriesTitle" disabled={isSubmitting} {...props} />
+                  {values.type === 'series' && (
+                    <DMInputGroup
+                      title="Series Title"
+                      id="seriesTitle"
+                      disabled={isSubmitting}
+                      {...props}
+                    />
                   )}
                 </Card.Body>
               </Card>
-              <Card className="rounded-0 mt-3">
-                <Card.Header>Images</Card.Header>
+              <Card className="rounded mt-3">
+                <Card.Header>
+                  <h3 className="m-0">Images</h3>
+                </Card.Header>
                 <Card.Body>
                   <Form.Row>
                     <Col>
@@ -440,8 +442,10 @@ console.log(contest)
                   </Form.Row>
                 </Card.Body>
               </Card>
-              <Card className="rounded-0 mt-3">
-                <Card.Header>Rewards</Card.Header>
+              <Card className="rounded mt-3">
+                <Card.Header>
+                  <h3 className="m-0">Rewards</h3>
+                </Card.Header>
                 <Card.Body>
                   <DMInputGroup
                     title="Reward Description"
@@ -472,19 +476,26 @@ console.log(contest)
                       />
                     </Col>
                   </Form.Row>
-                  <DMSelectGroup title="Badge" id="badgeId" disabled={isSubmitting} {...props}>
+                  <DMSelectGroup
+                    title="Badge"
+                    id="badgeId"
+                    disabled={isSubmitting}
+                    {...props}
+                  >
                     <option value="">none</option>
                     {badgeOptions}
                   </DMSelectGroup>
                 </Card.Body>
               </Card>
-              <Card className="rounded-0 mt-3">
-                <Card.Header>Timeframe</Card.Header>
+              <Card className="rounded mt-3">
+                <Card.Header>
+                  <h3 className="m-0">Feature Time</h3>
+                </Card.Header>
                 <Card.Body>
                   <Form.Row>
                     <Col>
                       <Form.Group>
-                        <Form.Label>Feature Date/Time</Form.Label>
+                        <Form.Label>Start Date/Time</Form.Label>
                         <DateTimePicker
                           dropUp
                           id="featuredAt"
@@ -496,7 +507,7 @@ console.log(contest)
                     </Col>
                     <Col>
                       <Form.Group>
-                        <Form.Label>Expire Date/Time</Form.Label>
+                        <Form.Label>End Date/Time</Form.Label>
                         <DateTimePicker
                           dropUp
                           id="expiresAt"
@@ -509,12 +520,25 @@ console.log(contest)
                   </Form.Row>
                 </Card.Body>
               </Card>
-              <Card className="rounded-0 mt-3 mb-5">
-                <Card.Body>
-                  <SubmitButton disabled={isSubmitting} onClick={handleSubmit}>Update</SubmitButton>
+              <Card className="rounded mt-3 mb-5">
+                <Card.Body className="text-center">
+                  {typeof values.objectId === 'undefined' ? (
+                    <SubmitButton
+                      disabled={isSubmitting}
+                      onClick={handleSubmit}
+                    >
+                      Save
+                    </SubmitButton>
+                  ) : (
+                    <SubmitButton
+                      disabled={isSubmitting}
+                      onClick={handleSubmit}
+                    >
+                      Update
+                    </SubmitButton>
+                  )}
                 </Card.Body>
               </Card>
-              
             </Form>
           )
         }}

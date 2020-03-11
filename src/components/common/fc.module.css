@@ -210,6 +210,85 @@
   color: red;
 }
 
+.br {
+  text-decoration: none;
+  text-align: center;
+  /*height: 30px;*/
+  width: auto;
+  text-decoration: none;
+  transition-property: color, background-color, fill;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  /*color: white;*/
+  /*background-color: #ff5e6d;*/
+  color: white;
+  background-color: #6c757d;
+  border: 2px solid #6c757d;
+  border-radius: 50%;
+}
+
+.br:hover:enabled {
+  background-color: white;
+  color: #6c757d;
+}
+
+.br:disabled {
+  background-color: #f5f5f5;
+  border: 2px solid #f5f5f5;
+}
+
+.br:focus {
+  outline: none;
+}
+
+.bri {
+  color: white;
+}
+
+.br:hover:enabled .bri {
+  color: #6c757d;
+}
+
+.par {
+  text-decoration: none;
+  text-align: center;
+  /*height: 50px;*/
+  width: auto;
+  text-decoration: none;
+  /*color: white;*/
+  /*background-color: #ff5e6d;*/
+  color: #6c757d;
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 24px;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 5px 20px;
+}
+
+.par:hover:enabled {
+  background-color: white;
+  color: #ff5e6d;
+}
+
+.par:focus:enabled {
+  outline: none;
+}
+
+.par:disabled {
+  background-color: #f5f5f5;
+  border: 2px solid #f5f5f5;
+}
+
+.pari {
+  margin-right: 10px;
+  color: #6c757d;
+}
+
+.par:hover:enabled .pari {
+  color: #ff5e6d;
+}
+
 .imgViewer {
   position: relative;
   width: 100px;
@@ -220,7 +299,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #EBECEE;
+  background-color: #ebecee;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -238,13 +317,54 @@
   color: #6c757d;
 }
 
-
 .imgContainer {
   position: absolute;
+  top: 0;
   z-index: 3;
   width: 100%;
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.zr {
+  text-decoration: none;
+  text-align: center;
+  /*height: 30px;*/
+  width: auto;
+  text-decoration: none;
+  /*color: white;*/
+  /*background-color: #ff5e6d;*/
+  color: #6c757d;
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 24px;
+  font-weight: bold;
+  font-size: 16px;
+
+  padding: 5px 20px;
+}
+
+.zr:hover:enabled {
+  background-color: white;
+  color: #ff5e6d;
+}
+
+.zr:disabled {
+  background-color: #f5f5f5;
+  border: 2px solid #f5f5f5;
+}
+
+.zr:focus {
+  outline: none;
+}
+
+.zri {
+  margin-right: 10px;
+  color: #6c757d;
+}
+
+.zr:hover:enabled .zri {
+  color: #ff5e6d;
 }

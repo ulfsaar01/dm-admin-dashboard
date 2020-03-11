@@ -4,7 +4,7 @@
   transition-property: margin-left;
   transition-duration: 0.2s;
   transition-timing-function: linear;
-  padding: 102px 0 0 0;
+  /*padding: 102px 0 0 0;*/
 }
 
 .contentActive {
@@ -18,7 +18,6 @@
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

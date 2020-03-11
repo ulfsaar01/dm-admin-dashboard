@@ -3,7 +3,7 @@ import styles from './fc.module.css'
 import { useField } from 'formik'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Form } from 'react-bootstrap'
-import { DateTimePicker, NumberPicker } from 'react-widgets'
+import { NumberPicker } from 'react-widgets'
 
 export const FieldInput = ({ ...props }) => {
   const [field, meta] = useField(props)
@@ -123,26 +123,26 @@ export const DMNumberGroup = ({ disabled, min, max, ...props }) => {
 
 export const DMImageUploadGroup = ({ disabled, onUpload, url, ...props }) => {
   return (
-    <Form.Group className="text-center justify-content-center">
+    <Form.Group className="text-center justify-content-center m-0">
       <Form.Label>{props.title}</Form.Label>
       <div className={`${styles.imgViewer} m-auto`}>
-        {(url) ? null : (
-        <div className={styles.imgIconContainerWrapper}>
-          <div className={styles.imgIconContainer}>
-            <FontAwesomeIcon
-              icon="image"
-              size="3x"
-              className={styles.imgIcon}
-            />
+        {url ? null : (
+          <div className={styles.imgIconContainerWrapper}>
+            <div className={styles.imgIconContainer}>
+              <FontAwesomeIcon
+                icon="image"
+                size="3x"
+                className={styles.imgIcon}
+              />
+            </div>
           </div>
-        </div>
         )}
         <div
           className={styles.imgContainer}
           style={{ backgroundImage: `url(${url})` }}
         ></div>
       </div>
-      
+
       <Form.Control
         type="file"
         id={props.id}
@@ -154,21 +154,20 @@ export const DMImageUploadGroup = ({ disabled, onUpload, url, ...props }) => {
         className="form-control border-0"
         hidden
       />
-      {(!disabled) ? (
-      <label
-        htmlFor={props.id}
-        className="btn btn-light mt-2 rounded-pill px-4"
-        disabled
-      >
-        <FontAwesomeIcon
-          icon="cloud-upload-alt"
-          size="1x"
-          className={`${styles.imgIcon} mr-2`}
-        />
-        <small className="text-uppercase font-weight-bold text-muted">
-          Choose Image
-        </small>
-      </label>
+      {!disabled ? (
+        <label
+          htmlFor={props.id}
+          className="btn btn-light mt-2 rounded-pill px-4"
+        >
+          <FontAwesomeIcon
+            icon="cloud-upload-alt"
+            size="1x"
+            className={`${styles.imgIcon} mr-2`}
+          />
+          <small className="text-uppercase font-weight-bold text-muted">
+            Choose Image
+          </small>
+        </label>
       ) : null}
     </Form.Group>
   )
@@ -182,7 +181,14 @@ export const SubmitButton = props => (
 
 export const CreateButton = props => (
   <button type="submit" className={styles.pr} onClick={props.onClick}>
-    <FontAwesomeIcon icon="plus" size="1x" className={styles.pri} />
+    <FontAwesomeIcon icon="brush" size="1x" className={styles.pri} />
+    {props.children}
+  </button>
+)
+
+export const CreateAltButton = props => (
+  <button type="submit" className={styles.par} onClick={props.onClick}>
+    <FontAwesomeIcon icon="brush" size="1x" className={styles.pari} />
     {props.children}
   </button>
 )
@@ -205,5 +211,18 @@ export const DeleteButton = props => (
   <button type="button" className={styles.dr} onClick={props.onClick}>
     <FontAwesomeIcon icon="skull" size="1x" className={styles.dri} />
     Delete
+  </button>
+)
+
+export const BackButton = props => (
+  <button className="roundBtn" onClick={props.onClick}>
+    <FontAwesomeIcon icon="chevron-left" color="#6c757d" size="lg" />
+  </button>
+)
+
+export const BackLongButton = props => (
+  <button className={styles.zr} onClick={props.onClick}>
+    <FontAwesomeIcon icon="chevron-left" size="lg" className={styles.zri} />
+    {props.children}
   </button>
 )

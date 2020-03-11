@@ -5,8 +5,13 @@ const Container = props => {
   const { isActive } = props
 
   return (
-    <div className={`${isActive ? styles.contentActive : styles.content} ${styles.pagecontent}`} id="content">
-       {props.children}
+    <div
+      className={`${isActive ? styles.contentActive : styles.content} ${
+        styles.pagecontent
+      }`}
+      id="content"
+    >
+      {props.children}
     </div>
   )
 }

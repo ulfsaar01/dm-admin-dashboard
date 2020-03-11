@@ -1,6 +1,5 @@
 const ERROR = {
-  "REQUIRE": "Oooops! You forgot this field.",
-};
+  REQUIRE: 'Oooops! You forgot this field.'
+}
 
-
-export default ERROR;
+export default ERROR

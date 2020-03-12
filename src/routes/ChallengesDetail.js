@@ -267,6 +267,8 @@ const ChallengesDetail = props => {
   }
 
   return (
+    <div>
+      <div className={`${styles.heroSm} decor`} />
     <div className={styles.wrap}>
       <BackLongButton onClick={goBack}>Return to Challenge</BackLongButton>
       <h2 className="py-3">Challenge</h2>
@@ -543,6 +545,7 @@ const ChallengesDetail = props => {
           )
         }}
       </Formik>
+    </div>
     </div>
   )
 }

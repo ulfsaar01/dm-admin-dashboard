@@ -14,7 +14,6 @@ export default function(state = initialState, action) {
       }
     }
     case USER_INVALID: {
-      console.log('*&*&*&*&*&*&*&')
       return {
         user: null,
         isAuthenticated: false

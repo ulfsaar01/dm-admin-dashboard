@@ -4,6 +4,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
 }
 
 .logo {
@@ -11,9 +14,26 @@
   height: 100px;
 }
 
+.lDev {
+  fill: #ff5e6d
+}
+
+.lProd {
+  fill: white
+}
+
 .formsignin {
   width: 100%;
   max-width: 330px;
   padding: 15px;
   margin: auto;
+}
+
+.standdown {
+  background-color: #343a40;
+  
+}
+
+.redalert {
+  background-color: tomato;
 }

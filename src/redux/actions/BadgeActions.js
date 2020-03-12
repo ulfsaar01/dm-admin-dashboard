@@ -1,5 +1,6 @@
 import { getHeaders } from '../../useFetch'
 import { BADGES, BADGES_ERROR } from '../../constants/BadgeActionConstants'
+import { baseUrl } from '../../data/envStorage.js'
 
 export const badges = () => {
   let featuredAt = new Date()
@@ -11,7 +12,7 @@ export const badges = () => {
     headers: getHeaders()
   }
 
-  const fullUrl = `${process.env.REACT_APP_SERVER_URL}getBadges1`
+  const fullUrl = `${baseUrl()}getBadges1`
   return async dispatch => {
     try {
       const response = await fetch(fullUrl, appendant)

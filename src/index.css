@@ -91,3 +91,15 @@ code {
   outline: none;
   background-color: #ff5e6d;
 }
+
+.decor {
+  background: linear-gradient(-0.3turn, #ff5e6d, #ff8872);
+}
+
+.sky {
+  background: linear-gradient(-0.3turn, #5E84FF, #72B9FF);
+}
+
+.gold {
+  background: linear-gradient(-0.3turn, #FFBC5E, #FFF272);
+}

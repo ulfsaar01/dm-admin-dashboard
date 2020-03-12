@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
+import { appId, baseUrl } from './data/envStorage.js'
 
 export const getHeaders = () => {
   const token = localStorage.getItem('userParseSessionToken')
@@ -7,7 +8,7 @@ export const getHeaders = () => {
     : undefined
   const headers = {
     'Content-Type': 'application/json',
-    'X-Parse-Application-Id': process.env.REACT_APP_APPID
+    'X-Parse-Application-Id': appId()
   }
 
   if (token) {
@@ -38,7 +39,7 @@ export const useFetch = functionName => {
         headers: getHeaders(),
         body: JSON.stringify({ featuredAt })
       }
-      const fullUrl = `${process.env.REACT_APP_SERVER_URL}${functionName}`
+      const fullUrl = `${baseUrl()}${functionName}`
       let response = await fetch(fullUrl, appendant)
       let data = await response.json()
       console.log('logging network')
@@ -61,7 +62,7 @@ export const login = async (username, password) => {
 }
 
 export const api = async (functionName, body, method = 'POST') => {
-  const url = `${process.env.REACT_APP_SERVER_URL}${functionName}`
+  const url = `${baseUrl()}${functionName}`
   const appendant = {
     method,
     headers: getHeaders(),

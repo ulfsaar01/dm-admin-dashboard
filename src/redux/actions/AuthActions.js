@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { USER_VALID, USER_INVALID } from '../../constants/AuthActionsConstants'
+import { appId, baseUrl } from '../../data/envStorage.js'
 
 const getHeaders = () => {
   const token = localStorage.getItem('userParseSessionToken')
@@ -7,7 +8,7 @@ const getHeaders = () => {
     : undefined
   const headers = {
     'Content-Type': 'application/json',
-    'X-Parse-Application-Id': process.env.REACT_APP_APPID
+    'X-Parse-Application-Id': appId()
   }
 
   if (token) {
@@ -17,7 +18,8 @@ const getHeaders = () => {
 }
 
 export const api = async (functionName, body, method = 'POST') => {
-  const url = `${process.env.REACT_APP_SERVER_URL}${functionName}`
+  console.log('[Parse][AuthActions] ' + baseUrl())
+  const url = `${baseUrl()}${functionName}`
   const appendant = {
     method,
     headers: getHeaders(),
@@ -76,7 +78,7 @@ export const login = (username, password) => async dispatch => {
     throw data.error
   } else {
     const user = data.result
-    console.log(user)
+    //console.log(user)
     localStorage.setItem('userParseSessionToken', user.sessionToken)
     localStorage.setItem('user', JSON.stringify(user))
     dispatch({ type: USER_VALID, user: user })

@@ -179,6 +179,12 @@ export const SubmitButton = props => (
   </button>
 )
 
+export const SubmitAltButton = props => (
+  <button type="submit" className={styles.par} {...props}>
+    {props.children}
+  </button>
+)
+
 export const CreateButton = props => (
   <button type="submit" className={styles.pr} onClick={props.onClick}>
     <FontAwesomeIcon icon="brush" size="1x" className={styles.pri} />

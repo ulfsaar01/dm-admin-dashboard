@@ -6,9 +6,13 @@ import { useSelector } from 'react-redux'
 
 const VerticalNav = () => {
   const user = useSelector(state => state.auth.user)
+  const isProd = useSelector(state => state.env.isProd)
 
   return (
-    <div className={`${styles.sidebar} ${styles.verticalnav}`} id="sidebar">
+    <div className={` ${styles.sidebar} ${styles.verticalnav}`} id="sidebar">
+      <div className="text-center my-4 text-dark">
+        {isProd ? <h2>PROD</h2> : <h2>DEV</h2>}
+      </div>
       <div>
         {user && user.cfTbImageUrl ? (
           <div className="text-center mb-4">
@@ -46,21 +50,6 @@ const VerticalNav = () => {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/products"
-            className="nav-link color-dm-grey"
-            activeClassName="color-dm-pink"
-          >
-            <FontAwesomeIcon
-              icon="rocket"
-              size="1x"
-              className="mr-2"
-              fixedWidth
-            />
-            Marketing Products
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
             to="/challenges"
             className="nav-link color-dm-grey"
             activeClassName="color-dm-pink"
@@ -89,6 +78,28 @@ const VerticalNav = () => {
             Badges
           </NavLink>
         </li>
+      </ul>
+    </div>
+  )
+}
+
+export default VerticalNav
+/*
+<li className="nav-item">
+          <NavLink
+            to="/products"
+            className="nav-link color-dm-grey"
+            activeClassName="color-dm-pink"
+          >
+            <FontAwesomeIcon
+              icon="rocket"
+              size="1x"
+              className="mr-2"
+              fixedWidth
+            />
+            Marketing Products
+          </NavLink>
+        </li>
         <li className="nav-item">
           <NavLink
             to="/magazine"
@@ -104,7 +115,6 @@ const VerticalNav = () => {
             Magazine
           </NavLink>
         </li>
-
         <li className="nav-item">
           <NavLink
             to="/blogs"
@@ -120,9 +130,4 @@ const VerticalNav = () => {
             Blogs
           </NavLink>
         </li>
-      </ul>
-    </div>
-  )
-}
-
-export default VerticalNav
+*/

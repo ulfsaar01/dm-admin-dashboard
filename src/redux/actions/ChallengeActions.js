@@ -3,6 +3,7 @@ import {
   CHALLENGES,
   CHALLENGES_ERROR
 } from '../../constants/ChallengeActionConstants'
+import { baseUrl } from '../../data/envStorage.js'
 
 export const challenges = () => {
   let featuredAt = new Date()
@@ -15,7 +16,7 @@ export const challenges = () => {
     body: JSON.stringify({ featuredAt })
   }
 
-  const fullUrl = `${process.env.REACT_APP_SERVER_URL}getDesignContests3`
+  const fullUrl = `${baseUrl()}getDesignContests3`
   return async dispatch => {
     try {
       const response = await fetch(fullUrl, appendant)

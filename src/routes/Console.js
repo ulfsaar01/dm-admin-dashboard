@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import TopNav from '../components/nav/TopNav'
 import VerticalNav from '../components/nav/VerticalNav'
 import Container from '../components/container/Container'
@@ -9,10 +10,11 @@ import Blogs from './Blogs'
 import Badges from './Badges'
 //import ViewControls from '../components/common/ViewControls'
 import ChallengesForm from './ChallengesDetail'
+import styles from './co.module.css'
 
 const Console = () => {
   const [isActive, setIsActive] = useState(true)
-  const [isGridView] = useState(true)
+  const { isProd, appId, baseUrl } = useSelector(state => state.env)
 
   useEffect(() => {
     function getSize() {
@@ -41,6 +43,8 @@ const Console = () => {
   //<ViewControls toggleListView={toggleListView} toggleGridView={toggleGridView}/>
   return (
     <>
+      { isProd ? <div className={styles.prodbar} /> : null}
+      
       <TopNav toggleVertNav={toggleVertNav} isActive={isActive} />
       <VerticalNav isActive={isActive} />
       <Container isActive={isActive} toggleVertNav={toggleVertNav}>

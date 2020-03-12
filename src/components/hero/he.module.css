@@ -1,0 +1,71 @@
+.decor {
+  background: linear-gradient(-0.3turn, #ff5e6d, #ff8872);
+}
+
+.sky {
+  background: linear-gradient(-0.3turn, #5E84FF, #72B9FF);
+}
+
+.splash {
+  position: relative;
+  height: 300px;
+  
+}
+
+.splashContainer {
+  position: relative;
+}
+
+.splashInfo {
+  position: absolute;
+  z-index: 10;
+  text-align: center;
+}
+
+.splashPicContainer {
+  position: absolute;
+  z-index: 5;
+  height: 100%;
+  overflow: hidden;
+}
+
+.splashPic {
+  width: 300px;
+}
+
+.options {
+  position: absolute;
+  top: 280px;
+  width: 300px;
+  z-index: 20;
+}
+
+.optionBtn {
+  outline: none !important;
+  background-color: transparent;
+  border: none;
+  padding: 0.7rem;
+}
+
+.optionBtn:focus {
+  outline: none;
+  background-color: transparent;
+}
+
+.optionBtn:hover {
+  outline: none !important;
+  background-color: #f8f8f8;
+}
+
+.optionBtn:active {
+  outline: none !important;
+  background-color: white;
+}
+
+.optionBtnIcon {
+  color: #6c757d;
+}
+
+.optionSelected {
+  color: #ff5e6d;
+}

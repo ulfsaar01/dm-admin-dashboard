@@ -2,6 +2,18 @@
   padding: 20px;
 }
 
+.prodbar {
+  height: 10px;
+  background-color: tomato;
+  position: fixed;
+  width: 100%;
+  z-index: 5000;
+}
+
+.heroSm {
+  height: 100px;
+}
+
 .splash {
   position: relative;
   height: 300px;
@@ -33,39 +45,28 @@
   cursor: pointer;
 }
 
-.options {
-  position: absolute;
-  top: 280px;
-  width: 300px;
-  z-index: 20;
+.dashCard {
+  height: 200px;
+  cursor: pointer;
 }
 
-.optionBtn {
-  outline: none !important;
-  background-color: transparent;
-  border: none;
-  padding: 0.7rem;
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
 }
 
-.optionBtn:focus {
-  outline: none;
-  background-color: transparent;
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
 }
 
-.optionBtn:hover {
-  outline: none !important;
-  background-color: #f8f8f8;
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
 }
 
-.optionBtn:active {
-  outline: none !important;
-  background-color: white;
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
 }
 
-.optionBtnIcon {
-  color: #6c757d;
-}
-
-.optionSelected {
-  color: #ff5e6d;
+/* Extra large devices (large laptops and desktops, 1600px and up) */
+@media only screen and (min-width: 1600px) {
 }

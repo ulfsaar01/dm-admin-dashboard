@@ -12,7 +12,7 @@
   transition-timing-function: linear;
   background-color: white;
   /*background: linear-gradient(-0.3turn, #ff5e6d, #FF8872);*/
-  padding-top: 75px;
+  padding-top: 0;
 }
 
 .animate {

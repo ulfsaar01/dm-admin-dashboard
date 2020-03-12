@@ -12,7 +12,7 @@
   transition-timing-function: linear;
   background-color: white;
   /*background: linear-gradient(-0.3turn, #ff5e6d, #FF8872);*/
-  padding-top: 102px;
+  padding-top: 75px;
 }
 
 .animate {
@@ -31,6 +31,11 @@
 
 .sidebarActive {
   margin-left: 0;
+}
+
+.profile {
+  border-radius: 50%;
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
 }
 
 /* Extra small devices (phones, 600px and down) */

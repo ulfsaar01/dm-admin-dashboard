@@ -10,43 +10,20 @@ import { challenges as challengesAction } from '../redux/actions/ChallengeAction
 import { badges as badgesAction } from '../redux/actions/BadgeActions'
 import { useLocation } from 'react-router-dom'
 import { CreateAltButton } from '../components/common/FormControls'
-//import { ReactComponent as Couch } from '../assets/038-couch.svg'
+import { ReactComponent as Couch } from '../assets/038-couch.svg'
 import { ReactComponent as Plant } from '../assets/039-plant.svg'
-//import { ReactComponent as Paint } from '../assets/003-paint-bucket.svg'
+import { ReactComponent as Fish } from '../assets/032-fishbowl.svg'
 
-const defaultChallenge = {
-  contest: {
-    objectId: '',
-    title: '',
-    status: '',
-    categoryId: '',
-    type: 'Design',
-    requirement: '',
-    guidelines: '',
-    guidelinesShort: '',
-    likesRequired: 0,
-    coinReward: 0,
-    featuredAt: '',
-    reward: '',
-    buttons: '',
-    thumbImageFile: '',
-    backdropImageFile: '',
-    contestImageFile: ''
-  }
-}
-
-const Challenges = props => {
+const Badges = props => {
   const { pathname } = useLocation()
   const history = useHistory()
   const [isGridView, setGridView] = useState(true)
 
   const dispatch = useDispatch()
-  const { data: badges } = useSelector(state => state.badges)
-  const { data, error, loading } = useSelector(state => state.challenges)
+  const { data, error, loading } = useSelector(state => state.badges)
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    dispatch(challengesAction())
     dispatch(badgesAction())
   }, [dispatch, pathname])
 
@@ -58,14 +35,16 @@ const Challenges = props => {
     setGridView(true)
   }
 
+  
   const handleNewChallengeClick = contest => {
-    const pathname = `/challenges/new`
-    history.push(pathname, { contest: defaultChallenge, badges: badges })
+    //const pathname = `/challenges/new`
+    //history.push(pathname, { contest: defaultChallenge, badges: badges })
   }
 
+
   const handleChallengeClick = contest => {
-    const pathname = `/challenges/${(contest || {}).objectId}`
-    history.push(pathname, { contest: contest, badges: badges })
+    //const pathname = `/challenges/${(contest || {}).objectId}`
+    //history.push(pathname, { contest: contest, badges: badges })
   }
 
   return (
@@ -74,13 +53,12 @@ const Challenges = props => {
         className={`${styles.splash} d-flex justify-content-center align-items-center align-self-center mb-5`}
       >
           <div className={styles.splashInfo}>
-            <h1 className="mb-4 text-white">Challenges</h1>
+            <h1 className="mb-4 text-white">Badges</h1>
             <CreateAltButton onClick={handleNewChallengeClick}>
-              Create Challenge
-            </CreateAltButton>
+            Create Badge</CreateAltButton>
           </div>
           <div className={styles.splashPicContainer}>
-            <Plant className={styles.splashPic} />
+            <Fish className={styles.splashPic} />
           </div>
      
         <div className={styles.options}>
@@ -110,24 +88,8 @@ const Challenges = props => {
           </div>
         </div>
       </div>
-    
-      {isGridView ? (
-        <ChallengesGridView
-          loading={loading}
-          data={data}
-          error={error}
-          handleChallengeClick={handleChallengeClick}
-        />
-      ) : (
-        <ChallengesListView
-          loading={loading}
-          data={data}
-          error={error}
-          handleChallengeClick={handleChallengeClick}
-        />
-      )}
     </>
   )
 }
 
-export default Challenges
+export default Badges

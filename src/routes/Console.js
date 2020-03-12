@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
-//import TopNav from '../components/nav/TopNav'
+import TopNav from '../components/nav/TopNav'
 import VerticalNav from '../components/nav/VerticalNav'
 import Container from '../components/container/Container'
 import Challenges from './Challenges'
 import Dashboard from './Dashboard'
 import Blogs from './Blogs'
+import Badges from './Badges'
 //import ViewControls from '../components/common/ViewControls'
 import ChallengesForm from './ChallengesDetail'
 
@@ -40,16 +41,14 @@ const Console = () => {
   //<ViewControls toggleListView={toggleListView} toggleGridView={toggleGridView}/>
   return (
     <>
+      <TopNav toggleVertNav={toggleVertNav} isActive={isActive} />
       <VerticalNav isActive={isActive} />
       <Container isActive={isActive} toggleVertNav={toggleVertNav}>
         <Switch>
           <Route exact path="/console" component={Dashboard} />
-          <Route
-            exact
-            path="/challenges"
-            component={() => <Challenges isGridView={isGridView} />}
-          />
+          <Route exact path="/challenges" component={Challenges}/>
           <Route exact path="/challenges/:id" component={ChallengesForm} />
+          <Route exact path="/badges" component={Badges}/>
           <Route exact path="/blogs" component={Blogs} />
         </Switch>
       </Container>

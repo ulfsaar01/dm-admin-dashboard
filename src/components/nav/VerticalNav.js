@@ -14,9 +14,9 @@ const VerticalNav = () => {
           <div className="text-center mb-4">
             <img
               src={user.cfTbImageUrl}
-              className=""
-              width="50"
-              heigh="50"
+              className={styles.profile}
+              width="65"
+              heigh="65"
               alt="profile pic"
             />
             <p className="pt-2 color-dm-grey font-weight-bold">

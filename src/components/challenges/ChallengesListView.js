@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, Alert, Table } from 'react-bootstrap'
 import styles from './clv.module.css'
 import { formatDate, daysRemaining } from '../../Utils'
+import Loader from '../common/Loader'
 
 const ChallengeEntry = ({ contest, handleChallengeClick }) => {
   const notStarted = daysRemaining(contest.featuredAt) < 0 ? false : true
@@ -54,7 +55,7 @@ const ChallengesListView = props => {
   const { loading, data, handleChallengeClick } = props
 
   if (loading) {
-    return <Alert variant="primary">Loading</Alert>
+    return <Loader/>
   }
 
   if ((data || {}).error) {

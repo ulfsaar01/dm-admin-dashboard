@@ -10,7 +10,7 @@ const AppRoutes = () => {
         <Route exact path="/" component={Login} />
         <Route path="/console" component={Console} />
         <Route
-          path={['/i', '/s', '/challenges', '/blogs']}
+          path={['/i', '/s', '/challenges', '/badges', '/blogs']}
           component={Console}
         />
       </Switch>

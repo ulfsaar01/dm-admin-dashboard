@@ -18,7 +18,7 @@ import { setToDev as setToDevAction, setToProd as setToProdAction } from '../red
 const Login = () => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const [switchProd, setSwitchProd] = useState(false)
+  const [switchProd] = useState(false)
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
   const { isProd, appId, baseUrl } = useSelector(state => state.env)
 

@@ -66,7 +66,7 @@ const ChallengesListView = props => {
   const { designContests } = data.result
 
   return (
-    <div className={styles.wrap}>
+    <div className="p-4">
       <Card className="rounded mb-3">
         <Card.Body className="p-0">
           <Table

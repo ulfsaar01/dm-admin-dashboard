@@ -67,6 +67,7 @@ const Challenges = props => {
       <Hero
         title="Challenges"
         createTitle="Create Challenge"
+        styling="decor"
         isGridView={isGridView}
         toggleListView={toggleListView}
         toggleGridView={toggleGridView}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import TopNav from '../components/nav/TopNav'
 import VerticalNav from '../components/nav/VerticalNav'
 import Container from '../components/container/Container'
@@ -14,7 +14,7 @@ import styles from './co.module.css'
 
 const Console = () => {
   const [isActive, setIsActive] = useState(true)
-  const { isProd, appId, baseUrl } = useSelector(state => state.env)
+  const { isProd } = useSelector(state => state.env)
 
   useEffect(() => {
     function getSize() {

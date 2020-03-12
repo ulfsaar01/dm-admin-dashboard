@@ -5,7 +5,7 @@ import Hero from '../components/hero/HeroDash'
 import styles from './co.module.css'
 import { ReactComponent as Plant } from '../assets/039-plant.svg'
 import { ReactComponent as Flower } from '../assets/047-flower.svg'
-import { ReactComponent as Lamp } from '../assets/037-lamp-1.svg'
+//import { ReactComponent as Lamp } from '../assets/037-lamp-1.svg'
 
 const Dashboard = () => {
   const history = useHistory()

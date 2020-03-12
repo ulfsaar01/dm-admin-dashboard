@@ -9,6 +9,8 @@ import { ReactComponent as Plant } from '../../assets/039-plant.svg'
 
 const Hero = props => {
   const {
+    sticker,
+    styling,
     title,
     createTitle,
     isGridView,
@@ -17,9 +19,11 @@ const Hero = props => {
     toggleListView
   } = props
 
+  const Stick = sticker ? sticker:Plant
+
   return (
     <div
-      className={`${styles.splash} ${styles.decor} d-flex justify-content-center align-items-center align-self-center mb-5`}
+      className={`${styles.splash} ${styling} d-flex justify-content-center align-items-center align-self-center mb-5`}
     >
       <div className={styles.splashInfo}>
         <h1 className="mb-4 text-white">{title}</h1>
@@ -28,7 +32,7 @@ const Hero = props => {
         </CreateAltButton>
       </div>
       <div className={styles.splashPicContainer}>
-        <Plant className={styles.splashPic} />
+        <Stick className={styles.splashPic} />
       </div>
 
       <div className={styles.options}>

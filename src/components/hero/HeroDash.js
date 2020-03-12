@@ -1,17 +1,13 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { Card } from 'react-bootstrap'
 import styles from './he.module.css'
-import { CreateAltButton } from '../../components/common/FormControls'
+
 //import { ReactComponent as Couch } from '../assets/038-couch.svg'
-import { ReactComponent as Plant } from '../../assets/039-plant.svg'
+//import { ReactComponent as Plant } from '../../assets/039-plant.svg'
 //import { ReactComponent as Paint } from '../assets/003-paint-bucket.svg'
 
 const Hero = props => {
-  const {
-    title,
-  } = props
-
   return (
     <div
       className={`${styles.splash} ${styles.sky} d-flex justify-content-center align-items-center align-self-center mb-5`}

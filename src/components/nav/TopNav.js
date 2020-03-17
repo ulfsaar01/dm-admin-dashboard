@@ -47,7 +47,7 @@ const TopNav = props => {
         />
       </button>
       <Navbar.Brand className="pl-2 m-0">
-        <Link to="console">
+        <Link to="/">
           <Logo
             height="26"
             width="180"

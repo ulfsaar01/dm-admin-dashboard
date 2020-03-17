@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import AppRoutes from './AppRoutes'
-import Parse from 'parse'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faBars,
@@ -29,9 +28,7 @@ import {
   faGift
 } from '@fortawesome/free-solid-svg-icons'
 import { faFortAwesome } from '@fortawesome/free-brands-svg-icons'
-
 import { validateUser } from './redux/actions/AuthActions'
-import { appId, baseUrl, setToDev } from './data/envStorage.js'
 
 library.add(
   faBars,
@@ -61,14 +58,6 @@ library.add(
 
 const App = _ => {
   const dispatch = useDispatch()
-
-  /*
-  if(!appId()) {
-    setToDev()
-  }
-*/
-  //Parse.initialize(appId())
-  // Parse.serverURL = baseUrl()
 
   useEffect(() => {
     dispatch(validateUser())

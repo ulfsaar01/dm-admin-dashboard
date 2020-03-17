@@ -46,8 +46,12 @@
 }
 
 .dashCard {
-  height: 200px;
   cursor: pointer;
+}
+
+.dashCardSplash {
+  height: 200px;
+  overflow: hidden;
 }
 
 /* Extra small devices (phones, 600px and down) */

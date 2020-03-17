@@ -14,18 +14,10 @@ const appReducer = combineReducers({
 
 const rootReducer = (state, action) => {
   if (action.type === USER_INVALID) {
-    const { routing } = state
-    state = { routing }
+    const { challenges, badges, gifts } = state
+    state = { challenges, badges, gifts }
   }
   return appReducer(state, action)
 }
 
-/*
-const rootReducer = combineReducers({
-  auth: AuthReducer,
-  challenges: ChallengeReducer,
-  badges: BadgeReducer,
-  gifts: GiftReducer
-})
-*/
 export default rootReducer

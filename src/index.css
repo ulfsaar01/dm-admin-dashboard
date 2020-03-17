@@ -102,10 +102,30 @@ code {
   background: linear-gradient(-0.3turn, #ff5e6d, #ff8872);
 }
 
+.decorsolid {
+  background-color: #E35360;
+}
+
 .sky {
   background: linear-gradient(-0.3turn, #5e84ff, #72b9ff);
 }
 
+.skysolid {
+  background-color: #5070D9;
+}
+
 .gold {
   background: linear-gradient(-0.3turn, #ffbc5e, #fff272);
+}
+
+.goldsolid {
+  background-color: #DCA252;
+}
+
+.violet {
+  background: linear-gradient(-0.3turn, #B65EFF, #D772FF);
+}
+
+.violetsolid {
+  background-color: #9F52DE;
 }

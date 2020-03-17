@@ -7,6 +7,7 @@ import { challenges as challengesAction } from '../redux/actions/ChallengeAction
 import { badges as badgesAction } from '../redux/actions/BadgeActions'
 import { useLocation } from 'react-router-dom'
 import Hero from '../components/hero/HeroSection'
+import { ReactComponent as Lamp } from '../assets/037-lamp-1.svg'
 
 const defaultChallenge = {
   contest: {
@@ -65,9 +66,10 @@ const Challenges = props => {
   return (
     <>
       <Hero
+        sticker={Lamp}
         title="Challenges"
         createTitle="Create Challenge"
-        styling="decor"
+        styling="sky"
         isGridView={isGridView}
         toggleListView={toggleListView}
         toggleGridView={toggleGridView}

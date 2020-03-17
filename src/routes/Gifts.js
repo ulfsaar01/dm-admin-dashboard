@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom'
 //import { ReactComponent as Plant } from '../assets/039-plant.svg'
 //import { ReactComponent as Fish } from '../assets/032-fishbowl.svg'
 import Hero from '../components/hero/HeroSection'
-import { ReactComponent as Flower } from '../assets/047-flower.svg'
+import { ReactComponent as Plant } from '../assets/039-plant.svg'
 
 const defaultGift = {
   objectId: null,
@@ -55,10 +55,10 @@ const Gifts = props => {
   return (
     <>
       <Hero
-        sticker={Flower}
+        sticker={Plant}
         title="Gifts"
         createTitle="Create Gift"
-        styling="gold"
+        styling="violet"
         isGridView={isGridView}
         toggleListView={toggleListView}
         toggleGridView={toggleGridView}

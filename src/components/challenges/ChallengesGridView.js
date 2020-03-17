@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Card } from 'react-bootstrap'
+import { CardColumns, Alert, Card } from 'react-bootstrap'
 import styles from './cgv.module.css'
 import { formatDate, daysRemaining } from '../../Utils'
 import Loader from '../common/Loader'
@@ -66,10 +66,7 @@ const ChallengesGridView = props => {
   const { designContests } = data.result
 
   return (
-    <div
-      className="d-inline-flex flex-row justify-content-center 
-    flex-wrap"
-    >
+    <CardColumns className={`${styles.cardcolumns} m-3`}>
       {designContests.map(contest => (
         <ChallengeCard
           key={contest.objectId}
@@ -77,7 +74,7 @@ const ChallengesGridView = props => {
           handleChallengeClick={handleChallengeClick}
         />
       ))}
-    </div>
+    </CardColumns>
   )
 }
 

@@ -11,14 +11,11 @@ import {
 import { Formik } from 'formik'
 import { login } from '../redux/actions/AuthActions'
 import Switch from 'react-switch'
-
 import {
-  isProd,
-  appId,
-  baseUrl,
   setToDev,
   setToProd
 } from '../data/envStorage.js'
+
 const Login = () => {
   const dispatch = useDispatch()
   const [switchProd, setSwitchProd] = useState(false)

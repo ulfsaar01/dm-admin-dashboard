@@ -22,6 +22,30 @@ export const FieldInput = ({ ...props }) => {
   )
 }
 
+export const DMAuthInputGroup = ({ disabled, ...props }) => {
+  return (
+    <Form.Group >
+      <Form.Control
+      size="lg"
+        type={props.type}
+        id={props.id}
+        name={props.id}
+        placeholder={props.placeholder}
+        value={props.values[props.id]}
+        onChange={props.handleChange}
+        onBlur={props.handleBlur}
+        className={`form-control ${props.errors[props.id] ? 'is-invalid' : ''}`}
+        isInvalid={!!props.errors[props.id]}
+        disabled={disabled}
+      />
+      {props.errors[props.id] && props.touched[props.id] && (
+        <div className="p-0 m-0 text-danger">{props.errors[props.id]}</div>
+      )}
+    </Form.Group>
+  )
+}
+
+
 export const DMInputGroup = ({ disabled, ...props }) => {
   return (
     <Form.Group>

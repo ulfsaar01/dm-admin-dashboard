@@ -1,50 +1,6 @@
-import axios from 'axios'
+import { getHeaders, api } from '../../useFetch'
 import { USER_VALID, USER_INVALID } from '../../constants/AuthActionsConstants'
-import { appId, baseUrl } from '../../data/envStorage.js'
-
-const getHeaders = () => {
-  const token = localStorage.getItem('userParseSessionToken')
-    ? localStorage.getItem('userParseSessionToken')
-    : undefined
-  const headers = {
-    'Content-Type': 'application/json',
-    'X-Parse-Application-Id': appId()
-  }
-
-  if (token) {
-    headers['X-Parse-Session-Token'] = token
-  }
-  return headers
-}
-
-export const api = async (functionName, body, method = 'POST') => {
-  console.log('[Parse][AuthActions] ' + baseUrl())
-  const url = `${baseUrl()}${functionName}`
-  const appendant = {
-    method,
-    headers: getHeaders(),
-    body
-  }
-  let response = await fetch(url, appendant)
-  return response.json()
-}
-
-export const sendBase64File = async (signedUrl, base64, file) => {
-  debugger
-  try {
-    const result = await axios.put(signedUrl, base64, {
-      headers: {
-        'Content-Type': file.type,
-        'Content-Encoding': 'base64'
-      }
-    })
-    debugger
-    return result
-  } catch (e) {
-    debugger
-    console.log(e)
-  }
-}
+import { baseUrl, deleteEnvStorage } from '../../data/envStorage.js'
 
 export const validateUser = () => dispatch => {
   const token = localStorage.getItem('userParseSessionToken')
@@ -78,20 +34,36 @@ export const login = (username, password) => async dispatch => {
     throw data.error
   } else {
     const user = data.result
-    //console.log(user)
+  
     localStorage.setItem('userParseSessionToken', user.sessionToken)
     localStorage.setItem('user', JSON.stringify(user))
     dispatch({ type: USER_VALID, user: user })
   }
 }
 
-export const logout = history => async dispatch => {
+export const logout = () => {
   console.log('[Parse][AuthActions] Logging Out')
-
-  await api('logOut')
-
-  localStorage.removeItem('userParseSessionToken')
-  localStorage.removeItem('user')
-  dispatch({ type: USER_INVALID })
-  history.push('/')
+  //console.log(getHeaders())
+  const appendant = {
+    method: 'POST',
+    mode: 'cors',
+    headers: getHeaders(),
+    body: JSON.stringify({})
+  }
+  
+  const fullUrl = `${baseUrl()}logOut`
+  return async dispatch => {
+    try {
+      await fetch(fullUrl, appendant)
+      localStorage.removeItem('userParseSessionToken')
+      localStorage.removeItem('user')
+      deleteEnvStorage()
+      dispatch({ type: USER_INVALID })
+    } catch (error) {
+      localStorage.removeItem('userParseSessionToken')
+      localStorage.removeItem('user')
+      deleteEnvStorage()
+      dispatch({ type: USER_INVALID })
+    }
+  }
 }

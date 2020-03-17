@@ -3,15 +3,15 @@ import { NavLink } from 'react-router-dom'
 import styles from './vn.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector } from 'react-redux'
+import { isProd } from '../../data/envStorage.js'
 
 const VerticalNav = () => {
   const user = useSelector(state => state.auth.user)
-  const isProd = useSelector(state => state.env.isProd)
 
   return (
     <div className={` ${styles.sidebar} ${styles.verticalnav}`} id="sidebar">
       <div className="text-center my-4 text-dark">
-        {isProd ? <h2>PROD</h2> : <h2>DEV</h2>}
+        {(isProd() === 'true') ? <h2>PROD</h2> : <h2>DEV</h2>}
       </div>
       <div>
         {user && user.cfTbImageUrl ? (
@@ -76,6 +76,21 @@ const VerticalNav = () => {
               fixedWidth
             />
             Badges
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink
+            to="/gifts"
+            className="nav-link color-dm-grey"
+            activeClassName="color-dm-pink"
+          >
+            <FontAwesomeIcon
+              icon="gift"
+              size="1x"
+              className="mr-2"
+              fixedWidth
+            />
+            Virtual Gifts
           </NavLink>
         </li>
       </ul>

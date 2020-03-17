@@ -27,7 +27,11 @@ simpleNumberLocalizer()
 export const store = createStore(rootReducer, applyMiddleware(thunk))
 
 Amplify.configure(awsconfig)
-
+/*
+store.subscribe(() => {
+  console.log("HI")
+})
+*/
 ReactDOM.render(
   <Provider store={store}>
     <App />

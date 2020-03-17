@@ -3,9 +3,6 @@ import { BADGES, BADGES_ERROR } from '../../constants/BadgeActionConstants'
 import { baseUrl } from '../../data/envStorage.js'
 
 export const badges = () => {
-  let featuredAt = new Date()
-  featuredAt.setDate(featuredAt.getDate() + 1000)
-
   const appendant = {
     method: 'POST',
     mode: 'cors',

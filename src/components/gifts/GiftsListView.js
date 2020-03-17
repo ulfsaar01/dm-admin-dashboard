@@ -2,27 +2,27 @@ import React from 'react'
 import { Card, Alert, Table } from 'react-bootstrap'
 import Loader from '../common/Loader'
 
-const BadgeEntry = ({ badge, handleClick }) => {
+const GiftEntry = ({ gift, handleClick }) => {
   return (
     <tr
-      key={badge.objectId}
+      key={gift.objectId}
       className="pointer"
-      onClick={() => handleClick(badge)}
+      onClick={() => handleClick(gift)}
     >
       <td className="text-center">
         <img
-          src={badge.imageFiles[badge.imageFiles.length - 1].url}
-          alt={badge.title}
+          src={gift.gifUrl}
+          alt={gift.title}
           width="100" height="100"
         />
       </td>
       <td>
-        <h5>{badge.title}</h5>
+        <h5>{gift.title}</h5>
       </td>
 
       
-  <td className="text-info">{badge.type}</td>
-  {badge.status === 'active' ? (
+  <td className="text-info">{gift.numCoins}</td>
+  {gift.status === 'active' ? (
         <td className="text-success">Live</td>
       ) : (
         <td className="text-danger">Inactive</td>
@@ -31,7 +31,7 @@ const BadgeEntry = ({ badge, handleClick }) => {
   )
 }
 
-const BadgesListView = props => {
+const GiftsListView = props => {
   const { loading, data, handleClick } = props
 
   if (loading) {
@@ -43,9 +43,7 @@ const BadgesListView = props => {
     return <Alert variant="danger">{error}</Alert>
   }
 
-  const { badges } = data
-
-  //console.log(badges)
+  const { virtualGifts } = data
 
   return (
     <div className="p-4">
@@ -61,15 +59,15 @@ const BadgesListView = props => {
               <tr>
                 <th></th>
                 <th>Title</th>
-                <th>Type</th>
+                <th>Coins</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              {badges.map(badge => (
-                <BadgeEntry
-                  key={badge.objectId}
-                  badge={badge}
+              {virtualGifts.map(gift => (
+                <GiftEntry
+                  key={gift.objectId}
+                  gift={gift}
                   handleClick={handleClick}
                 />
               ))}
@@ -81,4 +79,4 @@ const BadgesListView = props => {
   )
 }
 
-export default BadgesListView
+export default GiftsListView

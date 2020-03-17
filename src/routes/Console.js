@@ -8,13 +8,17 @@ import Challenges from './Challenges'
 import Dashboard from './Dashboard'
 import Blogs from './Blogs'
 import Badges from './Badges'
+import Gifts from './Gifts'
 //import ViewControls from '../components/common/ViewControls'
-import ChallengesForm from './ChallengesDetail'
+import ChallengeDetail from './ChallengeDetail'
+import GiftDetail from './GiftDetail'
+import Login from './Login'
 import styles from './co.module.css'
+import { isProd } from '../data/envStorage.js'
 
 const Console = () => {
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
   const [isActive, setIsActive] = useState(true)
-  const { isProd } = useSelector(state => state.env)
 
   useEffect(() => {
     function getSize() {
@@ -39,25 +43,27 @@ const Console = () => {
     setIsActive(!isActive)
   }
 
-  //<TopNav toggleVertNav={toggleVertNav} toggleListView={toggleListView} toggleGridView={toggleGridView}/>
-  //<ViewControls toggleListView={toggleListView} toggleGridView={toggleGridView}/>
-  return (
-    <>
-      { isProd ? <div className={styles.prodbar} /> : null}
-      
-      <TopNav toggleVertNav={toggleVertNav} isActive={isActive} />
-      <VerticalNav isActive={isActive} />
-      <Container isActive={isActive} toggleVertNav={toggleVertNav}>
-        <Switch>
-          <Route exact path="/console" component={Dashboard} />
-          <Route exact path="/challenges" component={Challenges}/>
-          <Route exact path="/challenges/:id" component={ChallengesForm} />
-          <Route exact path="/badges" component={Badges}/>
-          <Route exact path="/blogs" component={Blogs} />
-        </Switch>
-      </Container>
-    </>
-  )
+  if (isAuthenticated) {
+    return (
+      <>
+        {isProd() === 'true' ? <div className={styles.prodbar} /> : null}
+        <TopNav toggleVertNav={toggleVertNav} isActive={isActive} />
+        <VerticalNav isActive={isActive} />
+        <Container isActive={isActive} toggleVertNav={toggleVertNav}>
+          <Switch>
+            <Route exact path="/challenges" component={Challenges} />
+            <Route exact path="/challenges/:id" component={ChallengeDetail} />
+            <Route exact path="/badges" component={Badges} />
+            <Route exact path="/gifts" component={Gifts} />
+            <Route exact path="/gifts/:id" component={GiftDetail} />
+            <Route exact path="/blogs" component={Blogs} />
+            <Route component={Dashboard} />
+          </Switch>
+        </Container>
+      </>
+    )
+  }
+  return <Login />
 }
 
 export default Console

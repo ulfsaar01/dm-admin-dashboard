@@ -14,6 +14,8 @@ export const getHeaders = () => {
   if (token) {
     headers['X-Parse-Session-Token'] = token
   }
+
+  //console.log(headers)
   return headers
 }
 
@@ -52,17 +54,9 @@ export const useFetch = functionName => {
   return state
 }
 
-export const login = async (username, password) => {
-  const body = JSON.stringify({
-    username,
-    password
-  })
-
-  return await api('logInWithEmail1', body)
-}
-
 export const api = async (functionName, body, method = 'POST') => {
   const url = `${baseUrl()}${functionName}`
+  //console.log(url)
   const appendant = {
     method,
     headers: getHeaders(),
@@ -72,19 +66,18 @@ export const api = async (functionName, body, method = 'POST') => {
   return response.json()
 }
 
-export const sendBase64File = async (signedUrl, base64, file) => {
-  debugger
+export const sendBase64File = async (signedUrl, file) => {
+  //debugger;
   try {
-    const result = await axios.put(signedUrl, base64, {
+    const result = await axios.put(signedUrl, file, {
       headers: {
-        'Content-Type': file.type,
-        'Content-Encoding': 'base64'
+        "Content-Type": file.type
       }
-    })
-    debugger
-    return result
+    });
+    //debugger
+    return result;
   } catch (e) {
-    debugger
-    console.log(e)
+    //debugger
+    console.log(e);
   }
 }

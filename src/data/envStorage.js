@@ -6,13 +6,20 @@ const prodBase = 'https://decormatters-prod.herokuapp.com/parse/functions/'
 const devId = 1
 const prodId = 3
 
-export const isProd = localStorage.getItem(storageKeyIsProd)
+//export const isProd = localStorage.getItem(storageKeyIsProd)
+ 
+export const isProd = () => {
+  //console.log("storageKeyIsProd  " + localStorage.getItem(storageKeyIsProd))
+  return localStorage.getItem(storageKeyIsProd)
+}
 
 export const appId = () => {
+  //console.log("storageKeyAppId  " + localStorage.getItem(storageKeyAppId))
   return localStorage.getItem(storageKeyAppId)
 }
 
 export const baseUrl = () => {
+  //console.log("storageKeyBase  " + localStorage.getItem(storageKeyBase))
   return localStorage.getItem(storageKeyBase)
 }
 
@@ -31,6 +38,7 @@ export const setToProd = () => {
 export const deleteEnvStorage = () => {
   localStorage.removeItem(storageKeyAppId)
   localStorage.removeItem(storageKeyBase)
+  localStorage.removeItem(storageKeyIsProd)
 }
 /*
 DEV_BASE = https://decormatters-dev.herokuapp.com/parse/functions/

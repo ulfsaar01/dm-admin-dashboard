@@ -22,7 +22,6 @@ code {
   cursor: pointer;
 }
 
-
 @keyframes ripple {
   from {
     transform: scale(0);

@@ -28,7 +28,7 @@ const BadgesGridView = props => {
 
   const { badges } = data
 
-  console.log(badges)
+  //console.log(badges)
 
   return (
     <div

@@ -25,7 +25,8 @@ import {
   faSignOutAlt,
   faBrush,
   faChevronLeft,
-  faCopy
+  faCopy,
+  faGift
 } from '@fortawesome/free-solid-svg-icons'
 import { faFortAwesome } from '@fortawesome/free-brands-svg-icons'
 
@@ -54,18 +55,20 @@ library.add(
   faSignOutAlt,
   faBrush,
   faChevronLeft,
-  faCopy
+  faCopy,
+  faGift
 )
 
 const App = _ => {
   const dispatch = useDispatch()
 
+  /*
   if(!appId()) {
     setToDev()
   }
-
-  Parse.initialize(appId())
-  Parse.serverURL = baseUrl()
+*/
+  //Parse.initialize(appId())
+ // Parse.serverURL = baseUrl()
 
   useEffect(() => {
     dispatch(validateUser())

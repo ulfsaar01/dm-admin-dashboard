@@ -12,7 +12,13 @@ import { Formik } from 'formik'
 import { login } from '../redux/actions/AuthActions'
 import Switch from 'react-switch'
 
-import { isProd, appId, baseUrl, setToDev, setToProd } from '../data/envStorage.js'
+import {
+  isProd,
+  appId,
+  baseUrl,
+  setToDev,
+  setToProd
+} from '../data/envStorage.js'
 const Login = () => {
   const dispatch = useDispatch()
   const [switchProd, setSwitchProd] = useState(false)
@@ -23,15 +29,17 @@ const Login = () => {
 
   return (
     <div
-      className={`${switchProd ? styles.redalert : styles.standdown} ${styles.wr}`}
+      className={`${switchProd ? styles.redalert : styles.standdown} ${
+        styles.wr
+      }`}
     >
       <Formik
         initialValues={{ username: '', password: '' }}
         onSubmit={(values, { setSubmitting, setFieldError, setFieldValue }) => {
           const { username, password } = values
-          
+
           switchProd ? setToProd() : setToDev()
-          
+
           dispatch(login(username, password))
             .then()
             .catch(error => {

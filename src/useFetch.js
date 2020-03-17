@@ -71,13 +71,13 @@ export const sendBase64File = async (signedUrl, file) => {
   try {
     const result = await axios.put(signedUrl, file, {
       headers: {
-        "Content-Type": file.type
+        'Content-Type': file.type
       }
-    });
+    })
     //debugger
-    return result;
+    return result
   } catch (e) {
     //debugger
-    console.log(e);
+    console.log(e)
   }
 }

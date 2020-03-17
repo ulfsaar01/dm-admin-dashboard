@@ -31,7 +31,7 @@ import {
 import { faFortAwesome } from '@fortawesome/free-brands-svg-icons'
 
 import { validateUser } from './redux/actions/AuthActions'
-import { appId, baseUrl, setToDev  } from './data/envStorage.js'
+import { appId, baseUrl, setToDev } from './data/envStorage.js'
 
 library.add(
   faBars,
@@ -68,7 +68,7 @@ const App = _ => {
   }
 */
   //Parse.initialize(appId())
- // Parse.serverURL = baseUrl()
+  // Parse.serverURL = baseUrl()
 
   useEffect(() => {
     dispatch(validateUser())

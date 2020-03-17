@@ -269,283 +269,286 @@ const ChallengesDetail = props => {
   return (
     <div>
       <div className={`${styles.heroSm} decor`} />
-    <div className={styles.wrap}>
-      <BackLongButton onClick={goBack}>Return to Challenge</BackLongButton>
-      <h2 className="py-3">Challenge</h2>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={(values, { setSubmitting, setFieldError, setFieldValue }) => {
-          console.log('SUBMITTING')
-          const body = prepareSubmission(values)
-          submitChallenge(body, { setSubmitting })
-        }}
-        onReset={() => {
-          resetImages()
-        }}
-        validationSchema={challengeSchema}
-      >
-        {props => {
-          const { values, isSubmitting, handleSubmit } = props
-          return (
-            <Form onSubmit={handleSubmit}>
-              {typeof values.objectId === 'undefined' ? null : (
-                <Card className="rounded mb-3">
-                  <Card.Body>
-                    <Container fluid="true">
-                      <Row>
-                        <Col>
-                          <h4 className="m-0 p-0">
-                            {(contest || {}).objectId}
-                            <CopyToClipboard text={(contest || {}).objectId}>
-                              <FontAwesomeIcon
-                                icon="copy"
-                                size="1x"
-                                className={`${styles.copy} ml-2`}
-                              />
-                            </CopyToClipboard>
-                          </h4>
-                        </Col>
-                        <Col
-                          className={`align-items-center align-self-center 
+      <div className={styles.wrap}>
+        <BackLongButton onClick={goBack}>Return to Challenge</BackLongButton>
+        <h2 className="py-3">Challenge</h2>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={(
+            values,
+            { setSubmitting, setFieldError, setFieldValue }
+          ) => {
+            console.log('SUBMITTING')
+            const body = prepareSubmission(values)
+            submitChallenge(body, { setSubmitting })
+          }}
+          onReset={() => {
+            resetImages()
+          }}
+          validationSchema={challengeSchema}
+        >
+          {props => {
+            const { values, isSubmitting, handleSubmit } = props
+            return (
+              <Form onSubmit={handleSubmit}>
+                {typeof values.objectId === 'undefined' ? null : (
+                  <Card className="rounded mb-3">
+                    <Card.Body>
+                      <Container fluid="true">
+                        <Row>
+                          <Col>
+                            <h4 className="m-0 p-0">
+                              {(contest || {}).objectId}
+                              <CopyToClipboard text={(contest || {}).objectId}>
+                                <FontAwesomeIcon
+                                  icon="copy"
+                                  size="1x"
+                                  className={`${styles.copy} ml-2`}
+                                />
+                              </CopyToClipboard>
+                            </h4>
+                          </Col>
+                          <Col
+                            className={`align-items-center align-self-center 
                             justify-content-center text-right text-uppercase
                             font-weight-bold ${
                               contest.status === 'active'
                                 ? 'text-success'
                                 : 'text-danger'
                             }`}
-                        >
-                          {contest.status === 'active' ? 'active' : 'ended'}
-                        </Col>
-                      </Row>
-                    </Container>
+                          >
+                            {contest.status === 'active' ? 'active' : 'ended'}
+                          </Col>
+                        </Row>
+                      </Container>
+                    </Card.Body>
+                  </Card>
+                )}
+
+                <Card className="rounded">
+                  <Card.Header>
+                    <h3 className="m-0">Information</h3>
+                  </Card.Header>
+                  <Card.Body>
+                    <DMInputGroup
+                      title="Title"
+                      id="title"
+                      disabled={isSubmitting}
+                      {...props}
+                    />
+                    <DMSelectGroup
+                      title="Category"
+                      id="categoryId"
+                      disabled={isSubmitting}
+                      {...props}
+                    >
+                      {categoriesOptions}
+                    </DMSelectGroup>
+                    <DMTextAreaGroup
+                      title="Requirement"
+                      id="requirement"
+                      rows="3"
+                      disabled={isSubmitting}
+                      {...props}
+                    />
+                    <DMTextAreaGroup
+                      title="Guidelines"
+                      id="guidelines"
+                      rows="8"
+                      disabled={isSubmitting}
+                      {...props}
+                    />
+                    <DMTextAreaGroup
+                      title="Guidelines Short"
+                      id="guidelinesShort"
+                      rows="3"
+                      disabled={isSubmitting}
+                      {...props}
+                    />
+                    <DMTextAreaGroup
+                      title="Placment Buttons (JSON format)"
+                      id="buttons"
+                      rows="5"
+                      disabled={isSubmitting}
+                      {...props}
+                    />
                   </Card.Body>
                 </Card>
-              )}
-
-              <Card className="rounded">
-                <Card.Header>
-                  <h3 className="m-0">Information</h3>
-                </Card.Header>
-                <Card.Body>
-                  <DMInputGroup
-                    title="Title"
-                    id="title"
-                    disabled={isSubmitting}
-                    {...props}
-                  />
-                  <DMSelectGroup
-                    title="Category"
-                    id="categoryId"
-                    disabled={isSubmitting}
-                    {...props}
-                  >
-                    {categoriesOptions}
-                  </DMSelectGroup>
-                  <DMTextAreaGroup
-                    title="Requirement"
-                    id="requirement"
-                    rows="3"
-                    disabled={isSubmitting}
-                    {...props}
-                  />
-                  <DMTextAreaGroup
-                    title="Guidelines"
-                    id="guidelines"
-                    rows="8"
-                    disabled={isSubmitting}
-                    {...props}
-                  />
-                  <DMTextAreaGroup
-                    title="Guidelines Short"
-                    id="guidelinesShort"
-                    rows="3"
-                    disabled={isSubmitting}
-                    {...props}
-                  />
-                  <DMTextAreaGroup
-                    title="Placment Buttons (JSON format)"
-                    id="buttons"
-                    rows="5"
-                    disabled={isSubmitting}
-                    {...props}
-                  />
-                </Card.Body>
-              </Card>
-              <Card className="rounded mt-3">
-                <Card.Header>
-                  <h3 className="m-0">Challenge Type</h3>
-                </Card.Header>
-                <Card.Body>
-                  <DMSelectGroup
-                    title="Type"
-                    id="type"
-                    disabled={isSubmitting}
-                    {...props}
-                  >
-                    <option value="design">Design</option>
-                    <option value="series">Series</option>
-                  </DMSelectGroup>
-                  {values.type === 'series' && (
-                    <DMNumberGroup
-                      title="Num Series Challenges"
-                      id="numChallenges"
-                      min={0}
-                      max={100}
+                <Card className="rounded mt-3">
+                  <Card.Header>
+                    <h3 className="m-0">Challenge Type</h3>
+                  </Card.Header>
+                  <Card.Body>
+                    <DMSelectGroup
+                      title="Type"
+                      id="type"
                       disabled={isSubmitting}
                       {...props}
-                    />
-                  )}
-                  {values.type === 'series' && (
+                    >
+                      <option value="design">Design</option>
+                      <option value="series">Series</option>
+                    </DMSelectGroup>
+                    {values.type === 'series' && (
+                      <DMNumberGroup
+                        title="Num Series Challenges"
+                        id="numChallenges"
+                        min={0}
+                        max={100}
+                        disabled={isSubmitting}
+                        {...props}
+                      />
+                    )}
+                    {values.type === 'series' && (
+                      <DMInputGroup
+                        title="Series Title"
+                        id="seriesTitle"
+                        disabled={isSubmitting}
+                        {...props}
+                      />
+                    )}
+                  </Card.Body>
+                </Card>
+                <Card className="rounded mt-3">
+                  <Card.Header>
+                    <h3 className="m-0">Images</h3>
+                  </Card.Header>
+                  <Card.Body>
+                    <Form.Row>
+                      <Col>
+                        <DMImageUploadGroup
+                          title="Thumbnail Image"
+                          id="thumbImageFile"
+                          url={thumbUrl}
+                          onUpload={onUploadImage}
+                          disabled={isSubmitting}
+                          {...props}
+                        />
+                      </Col>
+                      <Col>
+                        <DMImageUploadGroup
+                          title="Backdrop Image"
+                          id="backdropImageFile"
+                          url={backdropUrl}
+                          onUpload={onUploadImage}
+                          disabled={isSubmitting}
+                          {...props}
+                        />
+                      </Col>
+                      <Col>
+                        <DMImageUploadGroup
+                          title="Contest Image"
+                          id="contestImageFile"
+                          url={contestUrl}
+                          onUpload={onUploadImage}
+                          disabled={isSubmitting}
+                          {...props}
+                        />
+                      </Col>
+                    </Form.Row>
+                  </Card.Body>
+                </Card>
+                <Card className="rounded mt-3">
+                  <Card.Header>
+                    <h3 className="m-0">Rewards</h3>
+                  </Card.Header>
+                  <Card.Body>
                     <DMInputGroup
-                      title="Series Title"
-                      id="seriesTitle"
+                      title="Reward Description"
+                      id="reward"
                       disabled={isSubmitting}
                       {...props}
                     />
-                  )}
-                </Card.Body>
-              </Card>
-              <Card className="rounded mt-3">
-                <Card.Header>
-                  <h3 className="m-0">Images</h3>
-                </Card.Header>
-                <Card.Body>
-                  <Form.Row>
-                    <Col>
-                      <DMImageUploadGroup
-                        title="Thumbnail Image"
-                        id="thumbImageFile"
-                        url={thumbUrl}
-                        onUpload={onUploadImage}
-                        disabled={isSubmitting}
-                        {...props}
-                      />
-                    </Col>
-                    <Col>
-                      <DMImageUploadGroup
-                        title="Backdrop Image"
-                        id="backdropImageFile"
-                        url={backdropUrl}
-                        onUpload={onUploadImage}
-                        disabled={isSubmitting}
-                        {...props}
-                      />
-                    </Col>
-                    <Col>
-                      <DMImageUploadGroup
-                        title="Contest Image"
-                        id="contestImageFile"
-                        url={contestUrl}
-                        onUpload={onUploadImage}
-                        disabled={isSubmitting}
-                        {...props}
-                      />
-                    </Col>
-                  </Form.Row>
-                </Card.Body>
-              </Card>
-              <Card className="rounded mt-3">
-                <Card.Header>
-                  <h3 className="m-0">Rewards</h3>
-                </Card.Header>
-                <Card.Body>
-                  <DMInputGroup
-                    title="Reward Description"
-                    id="reward"
-                    disabled={isSubmitting}
-                    {...props}
-                  />
 
-                  <Form.Row>
-                    <Col>
-                      <DMNumberGroup
-                        title="Like Required"
-                        id="likesRequired"
-                        min={0}
-                        max={1000}
-                        disabled={isSubmitting}
-                        {...props}
-                      />
-                    </Col>
-                    <Col>
-                      <DMNumberGroup
-                        title="Coin Reward Amount"
-                        id="coinReward"
-                        min={0}
-                        max={1000}
-                        disabled={isSubmitting}
-                        {...props}
-                      />
-                    </Col>
-                  </Form.Row>
-                  <DMSelectGroup
-                    title="Badge"
-                    id="badgeId"
-                    disabled={isSubmitting}
-                    {...props}
-                  >
-                    <option value="">none</option>
-                    {badgeOptions}
-                  </DMSelectGroup>
-                </Card.Body>
-              </Card>
-              <Card className="rounded mt-3">
-                <Card.Header>
-                  <h3 className="m-0">Feature Time</h3>
-                </Card.Header>
-                <Card.Body>
-                  <Form.Row>
-                    <Col>
-                      <Form.Group>
-                        <Form.Label>Start Date/Time</Form.Label>
-                        <DateTimePicker
-                          dropUp
-                          id="featuredAt"
-                          value={featuredAt}
-                          onChange={value => setFeaturedAt(value)}
+                    <Form.Row>
+                      <Col>
+                        <DMNumberGroup
+                          title="Like Required"
+                          id="likesRequired"
+                          min={0}
+                          max={1000}
                           disabled={isSubmitting}
+                          {...props}
                         />
-                      </Form.Group>
-                    </Col>
-                    <Col>
-                      <Form.Group>
-                        <Form.Label>End Date/Time</Form.Label>
-                        <DateTimePicker
-                          dropUp
-                          id="expiresAt"
-                          value={expiresAt}
-                          onChange={value => setExpiresAt(value)}
+                      </Col>
+                      <Col>
+                        <DMNumberGroup
+                          title="Coin Reward Amount"
+                          id="coinReward"
+                          min={0}
+                          max={1000}
                           disabled={isSubmitting}
+                          {...props}
                         />
-                      </Form.Group>
-                    </Col>
-                  </Form.Row>
-                </Card.Body>
-              </Card>
-              <Card className="rounded mt-3 mb-5">
-                <Card.Body className="text-center">
-                  {typeof values.objectId === 'undefined' ? (
-                    <SubmitButton
+                      </Col>
+                    </Form.Row>
+                    <DMSelectGroup
+                      title="Badge"
+                      id="badgeId"
                       disabled={isSubmitting}
-                      onClick={handleSubmit}
+                      {...props}
                     >
-                      Save
-                    </SubmitButton>
-                  ) : (
-                    <SubmitButton
-                      disabled={isSubmitting}
-                      onClick={handleSubmit}
-                    >
-                      Update
-                    </SubmitButton>
-                  )}
-                </Card.Body>
-              </Card>
-            </Form>
-          )
-        }}
-      </Formik>
-    </div>
+                      <option value="">none</option>
+                      {badgeOptions}
+                    </DMSelectGroup>
+                  </Card.Body>
+                </Card>
+                <Card className="rounded mt-3">
+                  <Card.Header>
+                    <h3 className="m-0">Feature Time</h3>
+                  </Card.Header>
+                  <Card.Body>
+                    <Form.Row>
+                      <Col>
+                        <Form.Group>
+                          <Form.Label>Start Date/Time</Form.Label>
+                          <DateTimePicker
+                            dropUp
+                            id="featuredAt"
+                            value={featuredAt}
+                            onChange={value => setFeaturedAt(value)}
+                            disabled={isSubmitting}
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group>
+                          <Form.Label>End Date/Time</Form.Label>
+                          <DateTimePicker
+                            dropUp
+                            id="expiresAt"
+                            value={expiresAt}
+                            onChange={value => setExpiresAt(value)}
+                            disabled={isSubmitting}
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Form.Row>
+                  </Card.Body>
+                </Card>
+                <Card className="rounded mt-3 mb-5">
+                  <Card.Body className="text-center">
+                    {typeof values.objectId === 'undefined' ? (
+                      <SubmitButton
+                        disabled={isSubmitting}
+                        onClick={handleSubmit}
+                      >
+                        Save
+                      </SubmitButton>
+                    ) : (
+                      <SubmitButton
+                        disabled={isSubmitting}
+                        onClick={handleSubmit}
+                      >
+                        Update
+                      </SubmitButton>
+                    )}
+                  </Card.Body>
+                </Card>
+              </Form>
+            )
+          }}
+        </Formik>
+      </div>
     </div>
   )
 }

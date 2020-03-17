@@ -7,7 +7,7 @@ const devId = 1
 const prodId = 3
 
 //export const isProd = localStorage.getItem(storageKeyIsProd)
- 
+
 export const isProd = () => {
   //console.log("storageKeyIsProd  " + localStorage.getItem(storageKeyIsProd))
   return localStorage.getItem(storageKeyIsProd)

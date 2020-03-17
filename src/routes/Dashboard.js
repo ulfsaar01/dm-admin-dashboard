@@ -22,17 +22,27 @@ const Dashboard = () => {
     <div>
       <Hero />
       <CardDeck className={styles.wrap}>
-        <Card className={`${styles.dashCard} decor text-white`} onClick={handleChallengeClick}>
-          <Plant/>
-          <Card.ImgOverlay className="d-flex flex-row 
-    justify-content-center align-items-center align-self-center ">
+        <Card
+          className={`${styles.dashCard} decor text-white`}
+          onClick={handleChallengeClick}
+        >
+          <Plant />
+          <Card.ImgOverlay
+            className="d-flex flex-row 
+    justify-content-center align-items-center align-self-center "
+          >
             <h1>Challenges</h1>
           </Card.ImgOverlay>
         </Card>
-        <Card className={`${styles.dashCard} gold text-white`} onClick={handleBadgeClick}>
-          <Flower/>
-          <Card.ImgOverlay className="d-flex flex-row 
-    justify-content-center align-items-center align-self-center ">
+        <Card
+          className={`${styles.dashCard} gold text-white`}
+          onClick={handleBadgeClick}
+        >
+          <Flower />
+          <Card.ImgOverlay
+            className="d-flex flex-row 
+    justify-content-center align-items-center align-self-center "
+          >
             <h1>Badges</h1>
           </Card.ImgOverlay>
         </Card>

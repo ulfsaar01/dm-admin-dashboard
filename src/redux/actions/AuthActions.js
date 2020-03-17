@@ -34,7 +34,7 @@ export const login = (username, password) => async dispatch => {
     throw data.error
   } else {
     const user = data.result
-  
+
     localStorage.setItem('userParseSessionToken', user.sessionToken)
     localStorage.setItem('user', JSON.stringify(user))
     dispatch({ type: USER_VALID, user: user })
@@ -50,7 +50,7 @@ export const logout = () => {
     headers: getHeaders(),
     body: JSON.stringify({})
   }
-  
+
   const fullUrl = `${baseUrl()}logOut`
   return async dispatch => {
     try {

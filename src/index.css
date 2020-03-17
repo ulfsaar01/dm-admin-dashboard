@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F5F9FF;
+  background-color: #f5f9ff;
   height: 100%;
 }
 
@@ -34,7 +34,6 @@ code {
   }
 }
 
-
 .ripple {
   width: 6rem;
   height: 6rem;
@@ -44,7 +43,6 @@ code {
   transform: translate(50%);
   animation: 1s ripple ease-out infinite;
 }
-
 
 .rounded {
   border-radius: 0.5rem !important;
@@ -105,9 +103,9 @@ code {
 }
 
 .sky {
-  background: linear-gradient(-0.3turn, #5E84FF, #72B9FF);
+  background: linear-gradient(-0.3turn, #5e84ff, #72b9ff);
 }
 
 .gold {
-  background: linear-gradient(-0.3turn, #FFBC5E, #FFF272);
+  background: linear-gradient(-0.3turn, #ffbc5e, #fff272);
 }

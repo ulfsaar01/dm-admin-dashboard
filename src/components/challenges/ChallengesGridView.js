@@ -55,7 +55,7 @@ const ChallengesGridView = props => {
   const { loading, data, handleChallengeClick } = props
 
   if (loading) {
-    return <Loader/>
+    return <Loader />
   }
 
   if ((data || {}).error) {

@@ -3,13 +3,12 @@
 }
 
 .sky {
-  background: linear-gradient(-0.3turn, #5E84FF, #72B9FF);
+  background: linear-gradient(-0.3turn, #5e84ff, #72b9ff);
 }
 
 .splash {
   position: relative;
   height: 300px;
-  
 }
 
 .splashContainer {

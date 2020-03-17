@@ -24,9 +24,9 @@ export const FieldInput = ({ ...props }) => {
 
 export const DMAuthInputGroup = ({ disabled, ...props }) => {
   return (
-    <Form.Group >
+    <Form.Group>
       <Form.Control
-      size="lg"
+        size="lg"
         type={props.type}
         id={props.id}
         name={props.id}
@@ -44,7 +44,6 @@ export const DMAuthInputGroup = ({ disabled, ...props }) => {
     </Form.Group>
   )
 }
-
 
 export const DMInputGroup = ({ disabled, ...props }) => {
   return (

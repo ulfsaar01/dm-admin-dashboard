@@ -15,11 +15,11 @@
 }
 
 .lDev {
-  fill: #ff5e6d
+  fill: #ff5e6d;
 }
 
 .lProd {
-  fill: white
+  fill: white;
 }
 
 .formsignin {
@@ -31,7 +31,6 @@
 
 .standdown {
   background-color: #343a40;
-  
 }
 
 .redalert {

@@ -18,7 +18,7 @@ const defaultGift = {
   numCoins: 0,
   thumbImageUrl: '',
   imageUrl: '',
-  gifUrl: '',
+  gifUrl: ''
 }
 
 const Gifts = props => {
@@ -42,12 +42,10 @@ const Gifts = props => {
     setGridView(true)
   }
 
-  
   const handleNewClick = gift => {
     const pathname = `/gifts/new`
     history.push(pathname, { gift: defaultGift })
   }
-
 
   const handleClick = gift => {
     const pathname = `/gifts/${(gift || {}).objectId}`

@@ -32,7 +32,7 @@ const GiftDetail = props => {
   const [imageUrl, setImageUrl] = useState(gift.imageUrl || null)
   const [animatedUrl, setAnimatedUrl] = useState(gift.gifUrl || null)
 
-  const savedAnimatedUrl = (gift.gifUrl || null)
+  const savedAnimatedUrl = gift.gifUrl || null
 
   const [thumbFile, setThumbFile] = useState()
   const [imageFile, setImageFile] = useState()
@@ -90,7 +90,7 @@ const GiftDetail = props => {
       numCoins
     }
 
-    if(gift.objectId) {
+    if (gift.objectId) {
       body.virtualGiftId = gift.objectId
     }
 
@@ -140,7 +140,7 @@ const GiftDetail = props => {
             prepareSubmission(values)
               .then(body => {
                 console.log(body)
-                
+
                 submitGift(body).then(result => {
                   console.log(result)
                   setSubmitting(false)

@@ -13,16 +13,16 @@ const BadgeEntry = ({ badge, handleClick }) => {
         <img
           src={badge.imageFiles[badge.imageFiles.length - 1].url}
           alt={badge.title}
-          width="100" height="100"
+          width="100"
+          height="100"
         />
       </td>
       <td>
         <h5>{badge.title}</h5>
       </td>
 
-      
-  <td className="text-info">{badge.type}</td>
-  {badge.status === 'active' ? (
+      <td className="text-info">{badge.type}</td>
+      {badge.status === 'active' ? (
         <td className="text-success">Live</td>
       ) : (
         <td className="text-danger">Inactive</td>
@@ -51,12 +51,7 @@ const BadgesListView = props => {
     <div className="p-4">
       <Card className="rounded mb-3">
         <Card.Body className="p-0">
-          <Table
-            hover
-            bordered
-            variant="light"
-            className="rounded"
-          >
+          <Table hover bordered variant="light" className="rounded">
             <thead>
               <tr>
                 <th></th>

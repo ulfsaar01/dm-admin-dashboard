@@ -15,7 +15,7 @@ const appReducer = combineReducers({
 const rootReducer = (state, action) => {
   if (action.type === USER_INVALID) {
     const { routing } = state
-    state = { routing } 
+    state = { routing }
   }
   return appReducer(state, action)
 }

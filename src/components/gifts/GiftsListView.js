@@ -10,19 +10,14 @@ const GiftEntry = ({ gift, handleClick }) => {
       onClick={() => handleClick(gift)}
     >
       <td className="text-center">
-        <img
-          src={gift.gifUrl}
-          alt={gift.title}
-          width="100" height="100"
-        />
+        <img src={gift.gifUrl} alt={gift.title} width="100" height="100" />
       </td>
       <td>
         <h5>{gift.title}</h5>
       </td>
 
-      
-  <td className="text-info">{gift.numCoins}</td>
-  {gift.status === 'active' ? (
+      <td className="text-info">{gift.numCoins}</td>
+      {gift.status === 'active' ? (
         <td className="text-success">Live</td>
       ) : (
         <td className="text-danger">Inactive</td>
@@ -49,12 +44,7 @@ const GiftsListView = props => {
     <div className="p-4">
       <Card className="rounded mb-3">
         <Card.Body className="p-0">
-          <Table
-            hover
-            bordered
-            variant="light"
-            className="rounded"
-          >
+          <Table hover bordered variant="light" className="rounded">
             <thead>
               <tr>
                 <th></th>

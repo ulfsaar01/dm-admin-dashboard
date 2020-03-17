@@ -11,7 +11,7 @@ const VerticalNav = () => {
   return (
     <div className={` ${styles.sidebar} ${styles.verticalnav}`} id="sidebar">
       <div className="text-center my-4 text-dark">
-        {(isProd() === 'true') ? <h2>PROD</h2> : <h2>DEV</h2>}
+        {isProd() === 'true' ? <h2>PROD</h2> : <h2>DEV</h2>}
       </div>
       <div>
         {user && user.cfTbImageUrl ? (

@@ -9,21 +9,21 @@ import styles from './tn.module.css'
 
 const TopNav = props => {
   const { toggleVertNav, isActive } = props
-  const [isSticky, setSticky] = useState(true);
+  const [isSticky, setSticky] = useState(true)
   const history = useHistory()
   const dispatch = useDispatch()
 
   const handleScroll = () => {
     setSticky(window.pageYOffset === 0)
-  };
+  }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll)
 
     return () => {
-      window.removeEventListener('scroll', () => handleScroll);
-    };
-  }, []);
+      window.removeEventListener('scroll', () => handleScroll)
+    }
+  }, [])
 
   const logout = () => {
     dispatch(logoutAction(history))
@@ -40,7 +40,11 @@ const TopNav = props => {
         className={`${styles.bl} ${styles.mn} ml-2`}
         onClick={toggleVertNav}
       >
-        <FontAwesomeIcon icon="bars" color={`${isSticky ? '#FFFFFF' : '#6c757d'}`} size="lg" />
+        <FontAwesomeIcon
+          icon="bars"
+          color={`${isSticky ? '#FFFFFF' : '#6c757d'}`}
+          size="lg"
+        />
       </button>
       <Navbar.Brand className="pl-2 m-0">
         <Link to="console">
@@ -53,7 +57,11 @@ const TopNav = props => {
         </Link>
       </Navbar.Brand>
       <button className={`${styles.bl}`} onClick={logout} alt="Log Out">
-        <FontAwesomeIcon icon="sign-out-alt" color={`${isSticky ? '#FFFFFF' : '#6c757d'}`} size="lg" />
+        <FontAwesomeIcon
+          icon="sign-out-alt"
+          color={`${isSticky ? '#FFFFFF' : '#6c757d'}`}
+          size="lg"
+        />
       </button>
     </Navbar>
   )

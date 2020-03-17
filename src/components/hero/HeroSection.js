@@ -19,7 +19,7 @@ const Hero = props => {
     toggleListView
   } = props
 
-  const Stick = sticker ? sticker:Plant
+  const Stick = sticker ? sticker : Plant
 
   return (
     <div

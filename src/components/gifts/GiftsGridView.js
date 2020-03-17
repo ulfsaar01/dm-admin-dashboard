@@ -5,8 +5,7 @@ import Loader from '../common/Loader'
 
 const GiftCard = ({ gift, handleClick }) => {
   return (
-    <Card className={styles.card}
-    onClick={() => handleClick(gift)}>
+    <Card className={styles.card} onClick={() => handleClick(gift)}>
       <Card.Img variant="top" src={gift.gifUrl} />
       <Card.Footer className="text-center font-weight-bold">
         {gift.title}
@@ -32,11 +31,7 @@ const GiftsGridView = props => {
   return (
     <CardColumns className={`${styles.cardcolumns} m-3`}>
       {virtualGifts.map(gift => (
-        <GiftCard
-          key={gift.objectId}
-          gift={gift}
-          handleClick={handleClick}
-        />
+        <GiftCard key={gift.objectId} gift={gift} handleClick={handleClick} />
       ))}
     </CardColumns>
   )

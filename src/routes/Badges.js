@@ -32,12 +32,10 @@ const Badges = props => {
     setGridView(true)
   }
 
-  
   const handleNewClick = contest => {
     const pathname = `/badges/new`
     //history.push(pathname, { contest: defaultChallenge, badges: badges })
   }
-
 
   const handleClick = contest => {
     //const pathname = `/challenges/${(contest || {}).objectId}`

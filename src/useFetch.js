@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { appId, baseUrl } from './data/envStorage.js'
+import base64Img from 'base64-img'
 
 export const getHeaders = () => {
   const token = localStorage.getItem('userParseSessionToken')
@@ -80,4 +81,13 @@ export const sendBase64File = async (signedUrl, file) => {
     //debugger
     console.log(e)
   }
+}
+
+export const getBase64File = url => {
+  return new Promise(function(resolve, reject) {
+    base64Img.requestBase64(url, function(err, res, body) {
+      if (err !== null) reject(err)
+      else resolve(body)
+    })
+  })
 }

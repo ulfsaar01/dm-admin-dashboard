@@ -18,6 +18,7 @@ import { isProd } from '../data/envStorage.js'
 
 const Console = () => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+  const user = useSelector(state => state.auth.user)
   const [isActive, setIsActive] = useState(true)
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const Console = () => {
     setIsActive(!isActive)
   }
 
-  if (isAuthenticated) {
+  if (isAuthenticated && user) {
     return (
       <>
         {isProd() === 'true' ? <div className={styles.prodbar} /> : null}
@@ -53,10 +54,14 @@ const Console = () => {
           <Switch>
             <Route exact path="/challenges" component={Challenges} />
             <Route exact path="/challenges/:id" component={ChallengeDetail} />
-            <Route exact path="/badges" component={Badges} />
-            <Route exact path="/gifts" component={Gifts} />
-            <Route exact path="/gifts/:id" component={GiftDetail} />
-            <Route exact path="/blogs" component={Blogs} />
+            {user.username === 'bill@decormatters.com' ? null : (
+              <>
+                <Route exact path="/badges" component={Badges} />
+                <Route exact path="/gifts" component={Gifts} />
+                <Route exact path="/gifts/:id" component={GiftDetail} />
+                <Route exact path="/blogs" component={Blogs} />
+              </>
+            )}
             <Route component={Dashboard} />
           </Switch>
         </Container>

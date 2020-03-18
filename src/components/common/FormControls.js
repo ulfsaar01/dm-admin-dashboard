@@ -255,3 +255,9 @@ export const BackLongButton = props => (
     {props.children}
   </button>
 )
+
+export const SecondaryButton = props => (
+  <button type="button" className={styles.spr} {...props}>
+    {props.children}
+  </button>
+)

@@ -11,10 +11,7 @@ import {
 import { Formik } from 'formik'
 import { login } from '../redux/actions/AuthActions'
 import Switch from 'react-switch'
-import {
-  setToDev,
-  setToProd
-} from '../data/envStorage.js'
+import { setToDev, setToProd } from '../data/envStorage.js'
 
 const Login = () => {
   const dispatch = useDispatch()

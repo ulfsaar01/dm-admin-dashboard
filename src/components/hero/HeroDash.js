@@ -8,7 +8,6 @@ const Hero = props => {
     >
       <div className={styles.splashInfo}></div>
       <div className={styles.splashPicContainer}></div>
-      
     </div>
   )
 }

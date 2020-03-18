@@ -63,36 +63,40 @@ const VerticalNav = () => {
             Challenges
           </NavLink>
         </li>
-        <li className="nav-item">
-          <NavLink
-            to="/badges"
-            className="nav-link color-dm-grey"
-            activeClassName="color-dm-pink"
-          >
-            <FontAwesomeIcon
-              icon="award"
-              size="1x"
-              className="mr-2"
-              fixedWidth
-            />
-            Badges
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/gifts"
-            className="nav-link color-dm-grey"
-            activeClassName="color-dm-pink"
-          >
-            <FontAwesomeIcon
-              icon="gift"
-              size="1x"
-              className="mr-2"
-              fixedWidth
-            />
-            Virtual Gifts
-          </NavLink>
-        </li>
+        {user.username === 'bill@decormatters.com' ? null : (
+          <>
+            <li className="nav-item">
+              <NavLink
+                to="/badges"
+                className="nav-link color-dm-grey"
+                activeClassName="color-dm-pink"
+              >
+                <FontAwesomeIcon
+                  icon="award"
+                  size="1x"
+                  className="mr-2"
+                  fixedWidth
+                />
+                Badges
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/gifts"
+                className="nav-link color-dm-grey"
+                activeClassName="color-dm-pink"
+              >
+                <FontAwesomeIcon
+                  icon="gift"
+                  size="1x"
+                  className="mr-2"
+                  fixedWidth
+                />
+                Virtual Gifts
+              </NavLink>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   )

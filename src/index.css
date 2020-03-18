@@ -103,7 +103,7 @@ code {
 }
 
 .decorsolid {
-  background-color: #E35360;
+  background-color: #e35360;
 }
 
 .sky {
@@ -111,7 +111,7 @@ code {
 }
 
 .skysolid {
-  background-color: #5070D9;
+  background-color: #5070d9;
 }
 
 .gold {
@@ -119,13 +119,13 @@ code {
 }
 
 .goldsolid {
-  background-color: #DCA252;
+  background-color: #dca252;
 }
 
 .violet {
-  background: linear-gradient(-0.3turn, #B65EFF, #D772FF);
+  background: linear-gradient(-0.3turn, #b65eff, #d772ff);
 }
 
 .violetsolid {
-  background-color: #9F52DE;
+  background-color: #9f52de;
 }

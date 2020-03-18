@@ -10,14 +10,15 @@ import {
   DMNumberGroup,
   DMImageUploadGroup,
   BackLongButton,
-  SubmitButton
+  SubmitButton,
+  SecondaryButton
 } from '../components/common/FormControls'
 import * as Yup from 'yup'
 import moment from 'moment'
 import { Formik } from 'formik'
 import styles from './co.module.css'
 import ERROR from '../constants/ValidationConstants'
-import { api } from '../useFetch'
+import { api, getBase64File } from '../useFetch'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const categories = require('../data/category.json')
@@ -63,13 +64,29 @@ const ChallengesDetail = props => {
   */
 
   const { pathname } = useLocation()
+  /*
+  const start = () => {
+    exports.requestBase64 = function(url, callback) {
+      request({
+        url: url,
+        isBuffer: true
+      }, function (err, res, body) {
+        if (err) return callback(err);
+    
+        var data = 'data:' + res.headers['content-type'] + ';base64,' + body.toString('base64');
+        callback(err, res, data);
+      });
+    };
+  }
+*/
   useEffect(() => {
     window.scrollTo(0, 0)
+    //start()
   }, [pathname])
+
   const history = useHistory()
   const { contest, badges } = (props.location || {}).state || {}
-
-  console.log(contest)
+  const [toCopy, setToCopy] = useState(false)
   const [thumbUrl, setThumbUrl] = useState((contest.thumbImageFile || {}).url)
   const [backdropUrl, setBackdropUrl] = useState(
     (contest.backdropImageFile || {}).url
@@ -106,6 +123,13 @@ const ChallengesDetail = props => {
       const file = event.target.files[0]
       const reader = new FileReader()
 
+      const fsize = Math.round(file.size/1024)
+
+      if(fsize >= 5120) {
+        alert("File is over 5MB limit")
+        return
+      }
+      
       reader.onload = e => {
         switch (id) {
           case 'thumbImageFile': {
@@ -130,7 +154,22 @@ const ChallengesDetail = props => {
     setContestUrl((prevContestUrl || {}).url)
   }
 
-  const prepareSubmission = values => {
+  /*
+  function startDownload() {
+    let imageURL = "https://cdn.glitch.com/4c9ebeb9-8b9a-4adc-ad0a-238d9ae00bb5%2Fmdn_logo-only_color.svg?1535749917189";
+   
+    const downloadedImg = new Image;
+    downloadedImg.crossOrigin = "Anonymous";
+    downloadedImg.addEventListener("load", imageReceived, false);
+    downloadedImg.src = imageURL;
+  }
+
+
+  const imageReceived = data => {
+    console.log(data)
+  }
+*/
+  const prepareSubmission = (values, isCopy = false) => {
     let {
       title,
       reward,
@@ -147,92 +186,118 @@ const ChallengesDetail = props => {
       buttons
     } = values
 
-    const designContestId = (contest || {}).objectId
-    /*
-    console.log(contestId)
-    console.log(title)
-    console.log(reward)
-    console.log(requirement)
-    console.log(guidelines)
-    console.log(guidelinesShort)
-    console.log(badgeId)
-    console.log(categoryId)
-    console.log(coinReward)
-    console.log(likesRequired)
-    console.log(type)
-    console.log(numChallenges)
-    console.log(seriesTitle)
-    console.log(buttons)
-    console.log(featuredAt)
-    console.log(expiresAt)
-    
-    console.log(thumbUrl)
-    console.log(backdropUrl)
-    */
-    const thumbImageData =
-      thumbUrl && !thumbUrl.includes('http')
-        ? {
-            __type: 'Bytes',
-            base64: thumbUrl
-          }
-        : undefined
+    const designContestId =
+      isCopy === true ? undefined : (contest || {}).objectId
 
-    const backdropImageData =
-      backdropUrl && !backdropUrl.includes('http')
-        ? {
-            __type: 'Bytes',
-            base64: backdropUrl
-          }
-        : undefined
+    //return body
+    var thumbImageData
+    var backdropImageData
+    var contestImageData
 
-    const contestImageData =
-      contestUrl && !contestUrl.includes('http')
-        ? {
-            __type: 'Bytes',
-            base64: contestUrl
-          }
-        : undefined
+    return new Promise(async (resolve, reject) => {
+      try {
+        JSON.parse(buttons)
+      } catch (e) {
+        reject(e)
+      }
 
-    const body = JSON.stringify({
-      title,
-      designContestId,
-      thumbImageData,
-      backdropImageData,
-      contestImageData,
-      reward,
-      requirement,
-      guidelines,
-      guidelinesShort,
-      badgeId,
-      categoryId,
-      expiresAt,
-      featuredAt,
-      coinReward,
-      likesRequired,
-      type,
-      numChallenges,
-      seriesTitle,
-      buttons
+      if (isCopy === true) {
+        //convert all image urls to base64
+        if (thumbUrl.includes('http')) {
+          //console.log(thumbUrl)
+          const data = await getBase64File(thumbUrl)
+          thumbImageData = {
+            __type: 'Bytes',
+            base64: data
+          }
+        }
+        if (backdropUrl.includes('http')) {
+          //console.log(backdropUrl)
+          const data = await getBase64File(backdropUrl)
+          backdropImageData = {
+            __type: 'Bytes',
+            base64: data
+          }
+        }
+
+        if (contestUrl.includes('http')) {
+          //console.log(contestUrl)
+          const data = await getBase64File(contestUrl)
+          contestImageData = {
+            __type: 'Bytes',
+            base64: data
+          }
+        }
+      } else {
+        thumbImageData =
+          thumbUrl && !thumbUrl.includes('http')
+            ? {
+                __type: 'Bytes',
+                base64: thumbUrl
+              }
+            : undefined
+
+        backdropImageData =
+          backdropUrl && !backdropUrl.includes('http')
+            ? {
+                __type: 'Bytes',
+                base64: backdropUrl
+              }
+            : undefined
+
+        contestImageData =
+          contestUrl && !contestUrl.includes('http')
+            ? {
+                __type: 'Bytes',
+                base64: contestUrl
+              }
+            : undefined
+      }
+      const body = {
+        title,
+        designContestId,
+        thumbImageData,
+        backdropImageData,
+        contestImageData,
+        reward,
+        requirement,
+        guidelines,
+        guidelinesShort,
+        badgeId,
+        categoryId,
+        expiresAt,
+        featuredAt,
+        coinReward,
+        likesRequired,
+        type,
+        numChallenges,
+        seriesTitle,
+        buttons
+      }
+
+      return resolve(body)
+    }).catch(error => {
+      throw error
     })
-
-    return body
   }
 
   const submitChallenge = (body, { setSubmitting }) => {
-    const designContestId = (contest || {}).objectId
+    //const designContestId = (contest || {}).objectId
     //console.log(body.contestId)
     try {
-      const apiName = `${designContestId ? 'update' : 'create'}DesignContest1`
+      const apiName = `${
+        body.designContestId ? 'update' : 'create'
+      }DesignContest1`
 
       api(apiName, body)
         .then(result => {
-          console.log('SAVE COMPLETE!!')
+          //console.log('SAVE COMPLETE!!')
           setSubmitting(false)
 
           if (result.error) {
             console.log('ERROR IN SAVING!!!!')
           } else {
-            console.log('SAVE COMPLETE!!')
+            //console.log('SAVE COMPLETE!!')
             history.push('/challenges')
           }
         })
@@ -278,9 +343,17 @@ const ChallengesDetail = props => {
             values,
             { setSubmitting, setFieldError, setFieldValue }
           ) => {
-            console.log('SUBMITTING')
-            const body = prepareSubmission(values)
-            submitChallenge(body, { setSubmitting })
+            prepareSubmission(values, toCopy)
+              .then(body => {
+                submitChallenge(JSON.stringify(body), { setSubmitting })
+              })
+              .catch(error => {
+                setFieldError(
+                  'buttons',
+                  'Looks like it is not formatted in JSON correctly'
+                )
+                setSubmitting(false)
+              })
           }}
           onReset={() => {
             resetImages()
@@ -532,15 +605,28 @@ const ChallengesDetail = props => {
                         disabled={isSubmitting}
                         onClick={handleSubmit}
                       >
-                        Save
+                        Create!
                       </SubmitButton>
                     ) : (
-                      <SubmitButton
-                        disabled={isSubmitting}
-                        onClick={handleSubmit}
-                      >
-                        Update
-                      </SubmitButton>
+                      <>
+                        <SecondaryButton
+                          disabled={isSubmitting}
+                          onClick={e => {
+                            //props.values.foo = true
+                            setToCopy(true)
+                            props.handleSubmit(e)
+                          }}
+                        >
+                          Create a Copy
+                        </SecondaryButton>
+                        <div className="d-inline pr-3" />
+                        <SubmitButton
+                          disabled={isSubmitting}
+                          onClick={handleSubmit}
+                        >
+                          Update
+                        </SubmitButton>
+                      </>
                     )}
                   </Card.Body>
                 </Card>

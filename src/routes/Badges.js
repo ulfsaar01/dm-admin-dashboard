@@ -13,6 +13,7 @@ import { ReactComponent as Flower } from '../assets/047-flower.svg'
 
 const Badges = props => {
   //const { pathname } = useLocation()
+  const { isLimited } = useSelector(state => state.auth)
   const [isGridView, setGridView] = useState(true)
 
   const dispatch = useDispatch()
@@ -49,6 +50,7 @@ const Badges = props => {
         createTitle="Create Badge"
         styling="gold"
         isGridView={isGridView}
+        hideCreate={isLimited}
         toggleListView={toggleListView}
         toggleGridView={toggleGridView}
         handleNewClick={handleNewClick}

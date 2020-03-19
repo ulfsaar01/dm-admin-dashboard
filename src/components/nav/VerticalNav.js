@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { isProd } from '../../data/envStorage.js'
 
 const VerticalNav = () => {
-  const user = useSelector(state => state.auth.user)
+  const { user, isLimited } = useSelector(state => state.auth)
 
   return (
     <div className={` ${styles.sidebar} ${styles.verticalnav}`} id="sidebar">
@@ -63,7 +63,7 @@ const VerticalNav = () => {
             Challenges
           </NavLink>
         </li>
-        {user.username === 'bill@decormatters.com' ? null : (
+        {isLimited === true ? null : (
           <>
             <li className="nav-item">
               <NavLink

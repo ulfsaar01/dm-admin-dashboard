@@ -37,7 +37,10 @@ export const login = (username, password) => async dispatch => {
 
     localStorage.setItem('userParseSessionToken', user.sessionToken)
     localStorage.setItem('user', JSON.stringify(user))
-    dispatch({ type: USER_VALID, user: user })
+    
+    const isLimited = user.username === 'dmqa@lodestoneco.com' ? true : false
+
+    dispatch({ type: USER_VALID, user: user, isLimited: isLimited })
   }
 }
 

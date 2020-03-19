@@ -1,0 +1,2 @@
+export const USER_INSPIRATIONS_RECENT_PCG = 'user_inspirations_recent_pcg'
+export const USER_INSPIRATIONS_RECENT_PCG_ERROR = 'user_inspirations_recent_pcg_error'

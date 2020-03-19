@@ -54,14 +54,10 @@ const Console = () => {
           <Switch>
             <Route exact path="/challenges" component={Challenges} />
             <Route exact path="/challenges/:id" component={ChallengeDetail} />
-            {user.username === 'bill@decormatters.com' ? null : (
-              <>
-                <Route exact path="/badges" component={Badges} />
-                <Route exact path="/gifts" component={Gifts} />
-                <Route exact path="/gifts/:id" component={GiftDetail} />
-                <Route exact path="/blogs" component={Blogs} />
-              </>
-            )}
+            <Route exact path="/badges" component={Badges} />
+            <Route exact path="/gifts" component={Gifts} />
+            <Route exact path="/gifts/:id" component={GiftDetail} />
+            <Route exact path="/blogs" component={Blogs} />
             <Route component={Dashboard} />
           </Switch>
         </Container>

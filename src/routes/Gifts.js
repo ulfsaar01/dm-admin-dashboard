@@ -24,6 +24,7 @@ const defaultGift = {
 const Gifts = props => {
   const { pathname } = useLocation()
   const history = useHistory()
+  const { isLimited } = useSelector(state => state.auth)
   const [isGridView, setGridView] = useState(true)
 
   const dispatch = useDispatch()
@@ -52,6 +53,7 @@ const Gifts = props => {
     history.push(pathname, { gift: gift })
   }
 
+  console.log(isLimited)
   return (
     <>
       <Hero
@@ -60,6 +62,7 @@ const Gifts = props => {
         createTitle="Create Gift"
         styling="violet"
         isGridView={isGridView}
+        hideCreate={isLimited}
         toggleListView={toggleListView}
         toggleGridView={toggleGridView}
         handleNewClick={handleNewClick}

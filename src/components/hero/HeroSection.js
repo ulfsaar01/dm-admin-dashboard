@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Card } from 'react-bootstrap'
 import styles from './he.module.css'
@@ -14,6 +14,7 @@ const Hero = props => {
     title,
     createTitle,
     isGridView,
+    hideCreate,
     handleNewClick,
     toggleGridView,
     toggleListView
@@ -21,15 +22,19 @@ const Hero = props => {
 
   const Stick = sticker ? sticker : Plant
 
+  const [isHideCreate] = useState(hideCreate || false)
+
   return (
     <div
       className={`${styles.splash} ${styling} d-flex justify-content-center align-items-center align-self-center mb-5`}
     >
       <div className={styles.splashInfo}>
         <h1 className="mb-4 text-white">{title}</h1>
+        {isHideCreate === true ? null : (
         <CreateAltButton onClick={handleNewClick}>
           {createTitle}
         </CreateAltButton>
+        )}
       </div>
       <div className={styles.splashPicContainer}>
         <Stick className={styles.splashPic} />

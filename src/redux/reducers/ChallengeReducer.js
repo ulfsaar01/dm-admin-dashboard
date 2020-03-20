@@ -1,13 +1,15 @@
 import {
   CHALLENGES,
+  CHALLENGES_PAGE,
   CHALLENGES_LOADING,
   CHALLENGES_ERROR
 } from '../../constants/ChallengeActionConstants'
 
 const initialState = {
-  data: null,
+  data: [],
   loading: true,
-  error: ''
+  error: '',
+  page: 1
 }
 
 export default function(state = initialState, action) {
@@ -15,7 +17,17 @@ export default function(state = initialState, action) {
     case CHALLENGES: {
       return {
         ...state,
-        data: action.data,
+        data: [...action.data.result.designContests],
+        page: 1,
+        loading: false,
+        error: null
+      }
+    }
+    case CHALLENGES_PAGE: {
+      return {
+        ...state,
+        data: [...state.data, ...action.data.result.designContests],
+        page: action.page + 1,
         loading: false,
         error: null
       }

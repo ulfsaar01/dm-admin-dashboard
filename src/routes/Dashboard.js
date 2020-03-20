@@ -30,17 +30,16 @@ const Dashboard = () => {
       <div className={styles.contentDashboard}>
         <Container>
           <Row className="justify-content-md-center">
-            <Col md={12} lg={10}>
+            <Col md={12}>
               <h2 className="text-white mb-5">DecorMatters-Dev</h2>
             </Col>
           </Row>
           <Row className="justify-content-md-center">
-            <Col md={12} lg={10}>
+            <Col md={12}>
               <UIRecentWidget />
             </Col>
           </Row>
         </Container>
-
         <CardColumns className={` m-3`}>
           <Card
             className={`${styles.dashCard} text-center`}

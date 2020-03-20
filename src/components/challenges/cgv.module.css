@@ -2,6 +2,17 @@
   cursor: pointer;
 }
 
+.grid {
+  margin: 20px 20px;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, minmax(320px, 320px));
+  grid-auto-rows: 320px 320px;
+  grid-auto-flow: dense;
+
+}
+
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 }
@@ -15,6 +26,9 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  .card {
+    width: 20rem;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */

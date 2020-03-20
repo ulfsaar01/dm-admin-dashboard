@@ -4,11 +4,12 @@ import styles from './clv.module.css'
 import { formatDate, daysRemaining } from '../../Utils'
 import Loader from '../common/Loader'
 
-const ChallengeEntry = ({ contest, handleChallengeClick }) => {
+const ChallengeEntry = ({ contest, refFn, handleChallengeClick }) => {
   const notStarted = daysRemaining(contest.featuredAt) < 0 ? false : true
 
   return (
     <tr
+      ref={refFn}
       key={contest.objectId}
       className={styles.tr}
       onClick={() => handleChallengeClick(contest)}
@@ -52,7 +53,7 @@ const ChallengeEntry = ({ contest, handleChallengeClick }) => {
 }
 
 const ChallengesListView = props => {
-  const { loading, data, handleChallengeClick } = props
+  const { loading, data, refFn, handleChallengeClick } = props
 
   if (loading) {
     return <Loader />
@@ -62,8 +63,6 @@ const ChallengesListView = props => {
     const { error } = (data || {}).error
     return <Alert variant="danger">{error}</Alert>
   }
-
-  const { designContests } = data.result
 
   return (
     <div className="p-4">
@@ -84,11 +83,12 @@ const ChallengesListView = props => {
               </tr>
             </thead>
             <tbody>
-              {designContests.map(contest => (
+              {data.map(contest => (
                 <ChallengeEntry
                   key={contest.objectId}
                   contest={contest}
                   handleChallengeClick={handleChallengeClick}
+                  refFn={refFn}
                 />
               ))}
             </tbody>
